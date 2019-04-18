@@ -1,4 +1,4 @@
 def main():
-    print("Welcome to Wizard Tower!zdfknlnsdfgs dhgjsd")
+    print("Welcome to Wizard Tower!")
 
 main()
