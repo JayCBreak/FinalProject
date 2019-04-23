@@ -2,6 +2,6 @@ import pygame, random
 
 
 def main():
-    print("Welcome to Wizard Tower!")
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to Wizard Tower!")
 
 main()
