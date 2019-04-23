@@ -1,7 +1,29 @@
 import pygame, random
-screenWidth = 800
-screenHeight = 400
+screenWidth = 900
+screenHeight = 1000
 FPS = 60
+
+class Button(pygame.sprite.Sprite):
+    def __init__(self, image = "", posx = 640, posy = 360, color = (255,0,0)):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(image)
+        self.center = (posx,posy)
+        self.background = (0,255,255)
+        self.mouse = pygame.mouse.get_pos()
+
+    def update(self):
+        self.rect = self.image.get_rect()
+        self.rect.center = self.center
+        self.mouse = pygame.mouse.get_pos()
+
+
+
+    def click(self):
+        # return true or false based on mouse over the button
+        if self.rect.collidepoint(self.mouse):
+            return True
+        else:
+            return False
 
 def setup():
     global screenHeight, screenWidth, FPS, screen
@@ -24,4 +46,3 @@ def main():
 
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!")
 setup()
-pygame.QUIT
