@@ -1,4 +1,4 @@
-import pygame, random
+import pygame
 screenWidth = 900
 screenHeight = 1000
 FPS = 60

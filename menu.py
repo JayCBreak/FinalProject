@@ -1,7 +1,7 @@
 import pygame
-import random
-import game
-import network
+import os
+os.system("python game.py")
+os.system("python network.py")
 screenWidth = 900
 screenHeight = 1000
 FPS = 60
