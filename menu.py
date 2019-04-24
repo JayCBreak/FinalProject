@@ -1,10 +1,25 @@
 import pygame
 import os
+os.system("python arrow.py")
+os.system("python checkpoint.py")
+os.system("python floor.py")
 os.system("python game.py")
 os.system("python network.py")
+os.system("python scoreboard.py")
+os.system("python spike.py")
+os.system("python wall.py")
+os.system("python wizard.py")
+
 screenWidth = 900
 screenHeight = 1000
 FPS = 60
+imgBackground =
+imgBtnPlay =
+imgBtnCharacterChange =
+imgBtnTutorial =
+imgBtnNameSet =
+imgBtnScoreboard =
+imgBtnExit =
 
 
 class Button(pygame.sprite.Sprite):
