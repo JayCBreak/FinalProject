@@ -26,7 +26,7 @@ class Button(pygame.sprite.Sprite):
             return False
 
 def setup():
-    global screenHeight, screenWidth, FPS, screen
+    global screenHeight, screenWidth, FPS, screen, clock
     pygame.init()
     pygame.mixer.init()
     screen = pygame.display.set_mode((screenWidth, screenHeight))
@@ -35,7 +35,7 @@ def setup():
     main()
 
 def main():
-    global screenWidth, screenHeight, screen
+    global screenWidth, screenHeight, screen, clock
     running = True
     while running:
         for event in pygame.event.get():
