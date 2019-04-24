@@ -34,6 +34,12 @@ def setup():
     screen = pygame.display.set_mode((screenWidth, screenHeight))
     pygame.display.set_caption("Wizard Tower Menu")
     clock = pygame.time.Clock()
+    btnPlay = Button(, , )
+    btnCharacterChange = Button(, , )
+    btnTutorial = Button(, , )
+    btnNameSet = Button(, , )
+    btnScoreboard = Button(, , )
+    btnExit = Button(, , )
     main()
 
 def main():
