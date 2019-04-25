@@ -17,8 +17,8 @@ imgBtnPlay = "./images/play.png"
 imgBtnCharacterChange = "./images/changeCharacter.png"
 imgBtnTutorial = "./images/tutorial.png"
 imgBtnNameSet = "./images/setName.png"
-imgBtnScoreboard = "./images/"
-imgBtnExit = "./images/"
+imgBtnScoreboard = "./images/scoreboard"
+imgBtnExit = "./images/exit"
 
 
 class Button(pygame.sprite.Sprite):
@@ -42,8 +42,7 @@ class Button(pygame.sprite.Sprite):
             return False
 
 
-def setup():
-    global screenHeight, screenWidth, FPS, screen, clock, allSprites
+def main():
     pygame.init()
     pygame.mixer.init()
     screen = pygame.display.set_mode((screenWidth, screenHeight))
@@ -57,12 +56,8 @@ def setup():
     btnExit = Button(imgBtnExit, 0, 0)
     allSprites = pygame.sprite.Group(btnPlay, btnCharacterChange, btnTutorial, btnNameSet, btnScoreboard, btnExit)
     background = pygame.image.load(imgBackground)
-    screen.blit(background, (0,0))
-    main()
+    screen.blit(background, (0, 0))
 
-
-def main():
-    global screenWidth, screenHeight, screen, clock, allSprites, FPS
     running = True
     while running:
         clock.tick(FPS)
@@ -79,4 +74,4 @@ def main():
         
 
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!")
-setup()
+main()

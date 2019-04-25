@@ -5,3 +5,11 @@ will respawn at last checkpoint.
 Hit box will be triangle.
 """
 
+class spike():
+    def __init__(self, x = 0 , y = 0):
+        self.xcord = x
+        self.ycord = y
+
+    def drawspike(self):
+        pygame.draw.polygon(screen, , [[100, 100], [0, 200], [200, 200]], 5)
+        spike = Image.open("spike")
