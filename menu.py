@@ -3,22 +3,28 @@ import os
 os.system("python arrow.py")
 os.system("python checkpoint.py")
 os.system("python floor.py")
+os.system("python game.py")
 os.system("python network.py")
 os.system("python scoreboard.py")
 os.system("python spike.py")
+os.system("python tutorial.py")
 os.system("python wall.py")
 os.system("python wizard.py")
 
 screenWidth = 900
 screenHeight = 1000
 FPS = 60
-imgBackground = ""
+imgBackground = "./images/background.jpeg"
+imgSprTWizard = "./images/tWizard.png"
+imgSPRTTower = "./images/tTower.png"
 imgBtnPlay = "./images/play.png"
-imgBtnCharacterChange = "./images/changeCharacter.png"
+imgBtnCharacter = "./images/character.png"
 imgBtnTutorial = "./images/tutorial.png"
 imgBtnNameSet = "./images/setName.png"
-imgBtnScoreboard = "./images/scoreboard"
-imgBtnExit = "./images/exit"
+imgBtnScoreboard = "./images/scoreboard.png"
+imgBtnExit = "./images/exit.png"
+
+
 
 
 class Button(pygame.sprite.Sprite):
@@ -48,13 +54,15 @@ def main():
     screen = pygame.display.set_mode((screenWidth, screenHeight))
     pygame.display.set_caption("Wizard Tower Menu")
     clock = pygame.time.Clock()
-    btnPlay = Button(imgBtnPlay, 0, 0)
-    btnCharacterChange = Button(imgBtnCharacterChange, 0, 0)
-    btnTutorial = Button(imgBtnTutorial, 0, 0)
-    btnNameSet = Button(imgBtnNameSet, 0, 0)
-    btnScoreboard = Button(imgBtnScoreboard, 0, 0)
-    btnExit = Button(imgBtnExit, 0, 0)
-    allSprites = pygame.sprite.Group(btnPlay, btnCharacterChange, btnTutorial, btnNameSet, btnScoreboard, btnExit)
+    sprTWizard = Button(imgSprTWizard, 180, 18)
+    sprTTower = Button(imgSPRTTower, 460, 190)
+    btnPlay = Button(imgBtnPlay, 215, 355)
+    btnTutorial = Button(imgBtnTutorial, 200, 525)
+    btnNameSet = Button(imgBtnNameSet, 200, 610)
+    btnCharacter = Button(imgBtnCharacter, 200, 695)
+    btnScoreboard = Button(imgBtnScoreboard, 200, 775)
+    btnExit = Button(imgBtnExit, 200, 860)
+    allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnScoreboard, btnExit, sprTWizard, sprTTower)
     background = pygame.image.load(imgBackground)
     screen.blit(background, (0, 0))
 
@@ -64,14 +72,13 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        screen.fill((255, 255, 255))
         pygame.display.flip()
         allSprites.clear(screen, background)
         allSprites.update()
         allSprites.draw(screen)
         pygame.display.flip()
-        pygame.mouse.set_visible(False)
+        pygame.mouse.set_visible(True)
         
 
-print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!")
+print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!\n\n\n\n\n\n")
 main()

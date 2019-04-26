@@ -7,7 +7,8 @@ A class to create the floor"""
 
 class Floor():
 
-    def__init__(self,image="",x=0,y=0)
-
+    def __init__(self, image="", x=0, y=0):
+        print()
 
     def main(self):
+        print()

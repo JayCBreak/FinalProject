@@ -1,4 +1,4 @@
-class Scoreboard():
+class Game():
 
     def __init__ (self, image="", x=0, y=0):
         print()
