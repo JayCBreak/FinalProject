@@ -11,5 +11,5 @@ class spike():
         self.ycord = y
 
     def drawspike(self):
-        pygame.draw.polygon(screen, , [[100, 100], [0, 200], [200, 200]], 5)
+        pygame.draw.polygon(screen, RED, (brickX, brickY, brickW, brickH), OUTLINE)
         spike = Image.open("spike")
