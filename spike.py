@@ -19,14 +19,10 @@ class Hitbox(pygame.sprite.Sprite):
         self.ycord = y
 
         self.image = pygame.Surface((wid,hei))
-        #self.image.fill ((255,0,0))
-
 
         self.rect = self.image.get_rect()
         self.rect.x = self.xcord
         self.rect.y = self.ycord
-
-
 
 class Spike(pygame.sprite.Sprite):
     def __init__(self, group, groupDraw, x = 0 , y = 0):
@@ -58,15 +54,6 @@ class Spike(pygame.sprite.Sprite):
         self.group.add(self.hitbox2)
         self.group.add(self.hitbox3)
 
-        """self.rect = self.image.get_rect()
-        self.hitbox = self.rect.inflate(-40, -20)
-        self.vel = Vector2(0, 0)
-        self.pos = Vector2(pos)
-        self.offset = Vector2(10, 0)"""
-
-
-
-
 
 
 
@@ -81,9 +68,15 @@ def main():
     background = background.convert()
     background.fill((255, 255, 255))
     screen.blit(background, (0,0))
-    allSprites = pygame.sprite.Group()
+
+    spikeHitboxes = pygame.sprite.Group()
     drawSpike = pygame.sprite.Group()
-    lespike = Spike(allSprites, drawSpike, 100,100)
+
+    lespike = Spike(spikeHitboxes, drawSpike, 275,200)
+    mespike = Spike(spikeHitboxes, drawSpike, 200,200)
+    kespike = Spike(spikeHitboxes, drawSpike, 350,200)
+    sespike = Spike(spikeHitboxes, drawSpike, 425 ,200)
+    hespike = Spike(spikeHitboxes, drawSpike, 500,200)
 
 
 
@@ -99,14 +92,15 @@ def main():
 
 
 
-        allSprites.clear(screen, background)
+        spikeHitboxes.clear(screen, background)
 
-        allSprites.update()
+        spikeHitboxes.update()
         drawSpike.update()
 
-        #drawSpike.draw(screen)
-        allSprites.draw(screen)
+        spikeHitboxes.draw(screen)
         drawSpike.draw(screen)
+
+
         pygame.display.flip()
 
 

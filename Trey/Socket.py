@@ -1,6 +1,6 @@
 """ Wizard Tower Socket
 Open Command Prompt
-ssg and ipconfig"""
+ssh and ipconfig"""
 import socket
 import sys
 
