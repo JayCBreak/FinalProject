@@ -102,7 +102,7 @@ def game(play = "play"):
         username = easygui.enterbox("Please Enter your preferred Username.", "Set Your Username")
     elif play == "character":
         print("This would change the players character model.")
-        charModel = easygui.buttonbox("Please choose your favorite wizard!", image="./images/wizards.png", ["Pink", "White", "Green", "Purple"])
+        charModel = easygui.buttonbox("Please choose your favorite wizard!", "Choose Your Character!", ["Pink", "White", "Green", "Blue"], image="./images/wizardSelect.png")
     elif play == "scoreboard":
         print("This would ping the server for a file which hosts the top players.")
 

@@ -34,8 +34,8 @@ class Spike(pygame.sprite.Sprite):
         self.group = group
         #self.group.add(self)
         groupDraw.add(self)
-        width = 200
-        height = 200
+        width = 75
+        height = 75
 
         self.xcord = x
         self.ycord = y
@@ -51,9 +51,9 @@ class Spike(pygame.sprite.Sprite):
         self.hitbox()
 
     def hitbox(self):
-        self.hitbox1 = Hitbox(self.rect.x + 90, self.rect.y + 70, 60, 60)
-        self.hitbox2 = Hitbox(self.rect.x + 30, self.rect.y + 140, 140, 60)
-        self.hitbox3 = Hitbox(self.rect.x + 70, self.rect.y + 40, 50, 100)
+        self.hitbox1 = Hitbox(self.rect.x + 23, self.rect.y + 28, 26, 30)
+        self.hitbox2 = Hitbox(self.rect.x + 10, self.rect.y + 58, 57, 17)
+        self.hitbox3 = Hitbox(self.rect.x + 31, self.rect.y + 15, 10, 20)
         self.group.add(self.hitbox1)
         self.group.add(self.hitbox2)
         self.group.add(self.hitbox3)
@@ -104,9 +104,9 @@ def main():
         allSprites.update()
         drawSpike.update()
 
-        drawSpike.draw(screen)
-        allSprites.draw(screen)
         #drawSpike.draw(screen)
+        allSprites.draw(screen)
+        drawSpike.draw(screen)
         pygame.display.flip()
 
 
