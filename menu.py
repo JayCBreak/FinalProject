@@ -1,16 +1,7 @@
 import pygame
 import os
 import easygui
-os.system("python arrow.py")
-os.system("python checkpoint.py")
-os.system("python floor.py")
-os.system("python game.py")
-os.system("python network.py")
-os.system("python scoreboard.py")
-os.system("python spike.py")
-os.system("python tutorial.py")
-os.system("python wall.py")
-os.system("python wizard.py")
+import subprocess
 
 screenWidth = 900
 screenHeight = 1000
@@ -28,8 +19,9 @@ imgBtnExit = "./images/exit.png"
 
 
 
+
 class Button(pygame.sprite.Sprite):
-    def __init__(self, image = "", x = 640, y = 360):
+    def __init__(self, image="", x=640, y=360):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(image)
         self.center = (x,y)
@@ -95,16 +87,18 @@ def main():
 
 def game(play = "play"):
     if play == "play":
-        print("This would connect to the server which is running the game, sending the variable username, and character.")
+        subprocess.Popen("python game.py")
     elif play == "tutorial":
         print("This would play a video which would show the tutorial of how to play and how to move.")
+        subprocess.Popen("python tutorial.py")
     elif play == "nameSet":
         username = easygui.enterbox("Please Enter your preferred Username.", "Set Your Username")
+        print("Thank you for setting your username to "+username+"!")
     elif play == "character":
         print("This would change the players character model.")
         charModel = easygui.buttonbox("Please choose your favorite wizard!", "Choose Your Character!", ["Pink", "White", "Green", "Blue"], image="./images/wizardSelect.png")
     elif play == "scoreboard":
-        print("This would ping the server for a file which hosts the top players.")
+        subprocess.Popen("python scoreboard.py")
 
 
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!\n\n\n\n\n\n\n\n")

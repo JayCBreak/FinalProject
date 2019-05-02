@@ -56,8 +56,7 @@ class Spike(pygame.sprite.Sprite):
 
 
 
-
-
+"""
 
 def main():
     screen = pygame.display.set_mode((900, 1000))
@@ -69,10 +68,10 @@ def main():
     background.fill((255, 255, 255))
     screen.blit(background, (0,0))
 
-    spikeHitboxes = pygame.sprite.Group()
+    spikeHitboxes = pygame.sprite.Group()                                  #***Groups needed in main***
     drawSpike = pygame.sprite.Group()
 
-    lespike = Spike(spikeHitboxes, drawSpike, 275,200)
+    lespike = Spike(spikeHitboxes, drawSpike, 275,200)                     #***Code to summon spikes***
     mespike = Spike(spikeHitboxes, drawSpike, 200,200)
     kespike = Spike(spikeHitboxes, drawSpike, 350,200)
     sespike = Spike(spikeHitboxes, drawSpike, 425 ,200)
@@ -92,7 +91,7 @@ def main():
 
 
 
-        spikeHitboxes.clear(screen, background)
+        spikeHitboxes.clear(screen, background)                          #***Updaters needed for spikes***
 
         spikeHitboxes.update()
         drawSpike.update()
@@ -109,3 +108,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""

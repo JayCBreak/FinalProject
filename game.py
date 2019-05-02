@@ -1,5 +1,9 @@
 import pygame
 
+screenWidth = 900
+screenHeight = 1000
+FPS = 60
+
 class Character(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -38,8 +42,12 @@ class Character(pygame.sprite.Sprite):
         if self.rect.bottom < 0:
             self.rect.top = screen.get_height()
 
-def main(self):
-    print()
+def main():
+    pygame.init()
+    pygame.mixer.init()
+    screen = pygame.display.set_mode((screenWidth, screenHeight))
+    pygame.display.set_caption("Wizard Tower Game")
+    print("This would connect to the server which is running the game, sending the variable username, character and also send xy data.")
 
 
 main()
