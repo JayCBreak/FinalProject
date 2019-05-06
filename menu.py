@@ -1,12 +1,16 @@
 import pygame
-import os
+import random
 import easygui
 import subprocess
 
 screenWidth = 900
 screenHeight = 1000
 FPS = 60
-imgBackground = "./images/background.jpeg"
+randBackground = random.randint(0, 100)
+if randBackground == 1:
+    imgBackground = "./images/whatbackground.jpeg"
+else:
+    imgBackground = "./images/background.jpeg"
 imgSprTWizard = "./images/tWizard.png"
 imgSPRTTower = "./images/tTower.png"
 imgBtnPlay = "./images/play.png"
@@ -82,8 +86,6 @@ def main():
         allSprites.clear(screen, background)
         allSprites.update()
         allSprites.draw(screen)
-        pygame.display.flip()
-        pygame.mouse.set_visible(True)
 
 def game(play = "play"):
     if play == "play":
