@@ -1,28 +1,31 @@
 import pygame
-import os
-os.system("python arrow.py")
-os.system("python checkpoint.py")
-os.system("python floor.py")
-os.system("python network.py")
-os.system("python scoreboard.py")
-os.system("python spike.py")
-os.system("python wall.py")
-os.system("python wizard.py")
+import random
+import easygui
+import subprocess
 
 screenWidth = 900
 screenHeight = 1000
 FPS = 60
-imgBackground = ""
+randBackground = random.randint(0, 100)
+if randBackground == 1:
+    imgBackground = "./images/whatbackground.jpeg"
+else:
+    imgBackground = "./images/background.jpeg"
+imgSprTWizard = "./images/tWizard.png"
+imgSPRTTower = "./images/tTower.png"
 imgBtnPlay = "./images/play.png"
-imgBtnCharacterChange = "./images/changeCharacter.png"
+imgBtnCharacter = "./images/character.png"
 imgBtnTutorial = "./images/tutorial.png"
 imgBtnNameSet = "./images/setName.png"
-imgBtnScoreboard = "./images/"
-imgBtnExit = "./images/"
+imgBtnScoreboard = "./images/scoreboard.png"
+imgBtnExit = "./images/exit.png"
+
+
+
 
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, image = "", x = 640, y = 360):
+    def __init__(self, image="", x=640, y=360):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(image)
         self.center = (x,y)
@@ -42,41 +45,64 @@ class Button(pygame.sprite.Sprite):
             return False
 
 
-def setup():
-    global screenHeight, screenWidth, FPS, screen, clock, allSprites
+def main():
     pygame.init()
     pygame.mixer.init()
     screen = pygame.display.set_mode((screenWidth, screenHeight))
     pygame.display.set_caption("Wizard Tower Menu")
     clock = pygame.time.Clock()
-    btnPlay = Button(imgBtnPlay, 0, 0)
-    btnCharacterChange = Button(imgBtnCharacterChange, 0, 0)
-    btnTutorial = Button(imgBtnTutorial, 0, 0)
-    btnNameSet = Button(imgBtnNameSet, 0, 0)
-    btnScoreboard = Button(imgBtnScoreboard, 0, 0)
-    btnExit = Button(imgBtnExit, 0, 0)
-    allSprites = pygame.sprite.Group(btnPlay, btnCharacterChange, btnTutorial, btnNameSet, btnScoreboard, btnExit)
+    sprTWizard = Button(imgSprTWizard, 320, 90)
+    sprTTower = Button(imgSPRTTower, 620, 240)
+    btnPlay = Button(imgBtnPlay, 215, 415)
+    btnTutorial = Button(imgBtnTutorial, 200, 555)
+    btnNameSet = Button(imgBtnNameSet, 200, 640)
+    btnCharacter = Button(imgBtnCharacter, 200, 725)
+    btnScoreboard = Button(imgBtnScoreboard, 200, 805)
+    btnExit = Button(imgBtnExit, 200, 890)
+    allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnScoreboard, btnExit, sprTWizard, sprTTower)
     background = pygame.image.load(imgBackground)
-    screen.blit(background, (0,0))
-    main()
+    screen.blit(background, (0, 0))
 
-
-def main():
-    global screenWidth, screenHeight, screen, clock, allSprites, FPS
     running = True
     while running:
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        screen.fill((255, 255, 255))
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if btnPlay.click():
+                    game("play")
+                elif btnTutorial.click():
+                    game("tutorial")
+                elif btnNameSet.click():
+                    game("nameSet")
+                elif btnCharacter.click():
+                    game("character")
+                elif btnScoreboard.click():
+                    game("scoreboard")
+                elif btnExit.click():
+                    running = False
         pygame.display.flip()
         allSprites.clear(screen, background)
         allSprites.update()
         allSprites.draw(screen)
-        pygame.display.flip()
-        pygame.mouse.set_visible(False)
-        
 
-print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!")
-setup()
+def game(play = "play"):
+    if play == "play":
+        subprocess.Popen("python game.py")
+    elif play == "tutorial":
+        print("This would play a video which would show the tutorial of how to play and how to move.")
+        subprocess.Popen("python tutorial.py")
+    elif play == "nameSet":
+        username = easygui.enterbox("Please Enter your preferred Username.", "Set Your Username")
+        print("Thank you for setting your username to "+username+"!")
+    elif play == "character":
+        print("This would change the players character model.")
+        charModel = easygui.buttonbox("Please choose your favorite wizard!", "Choose Your Character!", ["Pink", "White", "Green", "Blue"], image="./images/wizardSelect.png")
+    elif play == "scoreboard":
+        subprocess.Popen("python scoreboard.py")
+
+
+print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!\n\n\n\n\n\n\n\n")
+main()
+print("\n\nThank you for playing EpicGamer Co.'s Wizard Tower!\n\n")
