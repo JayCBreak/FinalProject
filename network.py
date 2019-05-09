@@ -1,28 +1,28 @@
 # An example script to connect to Google using socket
 # programming in Python
-import socket  # for socket
-import sys
+import socket
+#import  twisted
 
-try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print("Socket successfully created")
-except socket.error as err:
-    print("socket creation failed with error %s" %err)
 
-# default port for socket
-port = 8888
+def Main():
+    host = '69.157.26.203'
+    port = 8888
 
-try:
-    host_ip = socket.gethostbyname('69.157.26.203')
-except socket.gaierror:
+    mySocket = socket.socket()
+    mySocket.connect((host, port))
 
-    # this means could not resolve the host
-    print("there was an error resolving the host")
-    sys.exit()
+    message = input(" -> ")
 
-# connecting to the server
-s.connect((host_ip, port))
+    while message != 'q':
+        mySocket.send(message.encode())
+        data = mySocket.recv(1024).decode()
 
-print("the socket has successfully connected to our game server \ on port == %s" %(host_ip))
+        print ('Received from server: ' + data)
 
-socket.socket.sendall("I love cheese")
+        message = input(" -> ")
+
+    mySocket.close()
+
+
+if __name__ == '__main__':
+    Main()

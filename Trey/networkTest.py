@@ -1,27 +1,36 @@
-import pygame
-pygame.init()
+# first of all import the socket library
+import socket
 
-screen = pygame.display.set_mode((640,480))
+# next create a socket object
+s = socket.socket()
+print ("Socket successfully created")
 
-def main():
+# reserve a port on your computer in our
+# case it is 12345 but it can be anything
+port = 8888
 
-    image = pygame.Surface((50,50))
-    image.fill((36, 76, 0))
+# Next bind to the port
+# we have not typed any ip in the ip field
+# instead we have inputted an empty string
+# this makes the server listen to requests
+# coming from other computers on the network
+s.connect(('69.157.26.203', port))
+print ("socket binded to %s" %(port))
 
-    background = pygame.Surface(screen.get_size())
-    background.fill((255, 255, 255))
-    screen.blit(background, (0,0))
-    screen.blit(image, (100,100))
+# put the socket into listening mode
+s.listen(5)
+print ("socket is listening")
 
-    clock = pygame.time.Clock()
-    keepGoing = True
-    pygame.mouse.set_visible(True)
+# a forever loop until we interrupt it or
+# an error occurs
+while True:
 
-    while keepGoing:
-        clock.tick(30)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                keepGoing = False
-        pygame.display.flip()
-if __name__ == "__main__":
-    main()
+   # Establish connection with client.
+   c, addr = s.accept()
+   print ('Got connection from', addr)
+
+   # send a thank you message to the client.
+   c.send('Thank you for connecting')
+
+   # Close the connection with the client
+   c.close()
