@@ -8,9 +8,9 @@ screenHeight = 1000
 FPS = 60
 randBackground = random.randint(0, 100)
 if randBackground == 1:
-    imgBackground = "./images/whatbackground.jpeg"
+    imgBackground = "./images/Wizard Tower Arm.png"
 else:
-    imgBackground = "./images/background.jpeg"
+    imgBackground = "./images/WizardTower.png"
 imgSprTWizard = "./images/tWizard.png"
 imgSPRTTower = "./images/tTower.png"
 imgBtnPlay = "./images/play.png"
