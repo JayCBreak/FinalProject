@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 
-class ArrowBlock(pygame.sprite.Sprite):
+class ArrowBlockRight(pygame.sprite.Sprite):
 
     def __init__(self, x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
@@ -12,7 +12,7 @@ class ArrowBlock(pygame.sprite.Sprite):
         self.xcord = x
         self.ycord = y
 
-        self.image = pygame.image.load("./images/arrowblock.png").convert_alpha()
+        self.image = pygame.image.load("./images/arrowblockrev.png").convert_alpha()
         self.image = pygame.transform.scale(self.image,(width,height))
 
         self.rect = self.image.get_rect()
@@ -21,13 +21,13 @@ class ArrowBlock(pygame.sprite.Sprite):
 
     def update(self):
         pass
-class Arrow(pygame.sprite.Sprite):
+class ArrowRight(pygame.sprite.Sprite):
 
-    def __init__(self,arrowBlockGroup , x = 0 , y = 0):
+    def __init__(self,arrowBlockRightGroup , x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
 
-        self.arrowBlock = ArrowBlock(x,y)
-        arrowBlockGroup.add(self.arrowBlock)
+        self.arrowBlockRight = ArrowBlockRight(x,y)
+        arrowBlockRightGroup.add(self.arrowBlockRight)
 
         width = 75
         height = 20
@@ -35,17 +35,17 @@ class Arrow(pygame.sprite.Sprite):
         self.xcord = x
         self.ycord = y
 
-        self.image = pygame.image.load("./images/arrow.png").convert_alpha()
+        self.image = pygame.image.load("./images/arrowrev.png").convert_alpha()
         self.image = pygame.transform.scale(self.image,(width,height))
 
         self.rect = self.image.get_rect()
-        self.rect.x = self.xcord -70
+        self.rect.x = self.xcord +70
         self.rect.centery = self.ycord
 
     def update(self):
-        self.rect.centerx -= 7
-        if self.rect.x <= -100:
-            self.rect.x = self.xcord -70
+        self.rect.centerx += 7
+        if self.rect.x >= 900:
+            self.rect.x = self.xcord +70
         #pass
 
 
@@ -62,22 +62,12 @@ def main():
     background.fill((255, 255, 255))
     screen.blit(background, (0,0))
 
-    arrowBlockGroup = pygame.sprite.Group()
-    arrow = Arrow(arrowBlockGroup , 275,200)
-    arrow1 = Arrow(arrowBlockGroup , 100,300)
-    arrow2 = Arrow(arrowBlockGroup , 400,600)
-    arrow3 = Arrow(arrowBlockGroup , 825,900)
-    arrowstuff1 = pygame.sprite.Group( arrow,arrow1, arrow2, arrow3)
-
-
-
-    """y_counter = 0
-    arrowList = []
-    for i in range (10):
-        arrow =  Arrow(arrowBlockGroup , 275,0 + y_counter)
-        y_counter = y_counter + 100
-        arrowstuff1.add(arrow)"""
-
+    arrowBlockRightGroup = pygame.sprite.Group()                                   #***How to spawn a arrow left in***
+    arrow = ArrowRight(arrowBlockRightGroup , 275,200)
+    arrow1 = ArrowRight(arrowBlockRightGroup , 100,300)
+    arrow2 = ArrowRight(arrowBlockRightGroup , 400,600)
+    arrow3 = ArrowRight(arrowBlockRightGroup , 0,900)
+    arrowrightstuff = pygame.sprite.Group( arrow,arrow1, arrow2, arrow3)
 
 
     clock = pygame.time.Clock()
@@ -91,10 +81,10 @@ def main():
 
 
 
-        arrowstuff1.clear(screen, background)
-        arrowstuff1.update()
-        arrowBlockGroup.draw(screen)
-        arrowstuff1.draw(screen)
+        arrowrightstuff.clear(screen, background)                                #***Screen updaters for left arrows***
+        arrowrightstuff.update()
+        arrowBlockRightGroup.draw(screen)
+        arrowrightstuff.draw(screen)
 
 
 
