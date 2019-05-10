@@ -1,28 +1,32 @@
-# An example script to connect to Google using socket
-# programming in Python
 import socket
-#import  twisted
 
+class ClientSend:
+    def __init__(self, wizard = "b", username = "Bob", xCoord = 20, yCoord = 20):
+        self.w = wizard
+        self.n = username
+        self.x = xCoord
+        self.y = yCoord
 
-def Main():
-    host = '69.157.26.203'
+    def send(self):
+        message = [self.n, self.w, self.x., self.y]
+        mySocket.send(message.encode()+"\n")
+        data = mySocket.recv(1024).decode()
+
+def main():
+    host = '192.168.2.42'
     port = 8888
 
     mySocket = socket.socket()
     mySocket.connect((host, port))
 
-    message = input(" -> ")
+    while True:
 
-    while message != 'q':
-        mySocket.send(message.encode())
-        data = mySocket.recv(1024).decode()
 
-        print ('Received from server: ' + data)
+        print('Received from server: ' + data)
 
         message = input(" -> ")
 
     mySocket.close()
 
 
-if __name__ == '__main__':
-    Main()
+main()
