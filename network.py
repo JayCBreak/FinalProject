@@ -1,20 +1,26 @@
 import socket
 
-class send(wizard = "b", username = "Bob", xCoord = 20, yCoord = 20):
+class ClientSend:
+    def __init__(self, wizard = "b", username = "Bob", xCoord = 20, yCoord = 20):
+        self.w = wizard
+        self.n = username
+        self.x = xCoord
+        self.y = yCoord
+
+    def send(self):
+        message = [self.n, self.w, self.x., self.y]
+        mySocket.send(message.encode()+"\n")
+        data = mySocket.recv(1024).decode()
+
 def main():
     host = '192.168.2.42'
     port = 8888
-    name = username
-    wiz = wizard
-    x = xCoord
-    y = yCoord
 
     mySocket = socket.socket()
     mySocket.connect((host, port))
 
     while True:
-        mySocket.send(message.encode())
-        data = mySocket.recv(1024).decode()
+
 
         print('Received from server: ' + data)
 

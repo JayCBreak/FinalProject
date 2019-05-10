@@ -24,6 +24,7 @@ imgBtnExit = "./images/exit.png"
 
 
 
+
 class Button(pygame.sprite.Sprite):
     def __init__(self, image="", x=640, y=360):
         pygame.sprite.Sprite.__init__(self)
