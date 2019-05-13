@@ -9,6 +9,9 @@ PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.10
 PLAYER_GRAV = 0.8
 
+PLAYER2_ACC = 0.5
+PLAYER2_FRICTION = -0.10
+PLAYER2_GRAV = 0.8
 # Starting platforms (x,y,blockx,blocky)
 PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform (was 100,20)

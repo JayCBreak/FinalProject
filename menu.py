@@ -2,6 +2,7 @@ import pygame
 import random
 import easygui
 import subprocess
+import webbrowser
 
 screenWidth = 900
 screenHeight = 1000
@@ -19,7 +20,7 @@ imgBtnTutorial = "./images/tutorial.png"
 imgBtnNameSet = "./images/setName.png"
 imgBtnScoreboard = "./images/scoreboard.png"
 imgBtnExit = "./images/exit.png"
-imgnothing = "./images/Nothing.png"
+imgdoor = "./images/dooR.png"
 
 
 
@@ -40,7 +41,6 @@ class Button(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = self.center
         self.mouse = pygame.mouse.get_pos()
-        print(self.mouse)
         self.hover()
 
     def click(self):
@@ -72,7 +72,7 @@ def main():
     btnCharacter = Button(imgBtnCharacter, 200, 725, "./images/darkcharacter.png")
     btnScoreboard = Button(imgBtnScoreboard, 200, 805, "./images/darkscoreboard.png")
     btnExit = Button(imgBtnExit, 200, 890, "./images/darkexit.png")
-    secretdoor = Button(imgnothing, 677, 833, "./images/blackbox.jpg")
+    secretdoor = Button(imgdoor, 669, 847, "./images/dooR.png")
     allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnScoreboard, btnExit, secretdoor, sprTWizard, sprTTower)
     background = pygame.image.load(imgBackground)
     screen.blit(background, (0, 0))
@@ -95,7 +95,11 @@ def main():
                 elif btnScoreboard.click():
                     game("scoreboard")
                 elif secretdoor.click():
-                    print("Ricky dicky")
+                    counterfunny = 1
+                    while counterfunny <= 50:
+                        counterfunny += 1
+                        print("Secret Door Discovered!!!")
+                    webbrowser.open('https://www.youtube.com/watch?v=oHg5SJYRHA0')
                 elif btnExit.click():
                     running = False
         pygame.display.flip()
