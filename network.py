@@ -12,7 +12,7 @@ class ClientSend:
 
 
 def main():
-    host = '69.157.26.203'
+    host = '174.93.72.251'
     port = 8888
 
     mySocket = socket.socket()
