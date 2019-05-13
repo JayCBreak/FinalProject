@@ -11,13 +11,14 @@ PLAYER_GRAV = 0.8
 
 # Starting platforms (x,y,blockx,blocky)
 PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
-                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
-                 (125, HEIGHT - 350, 75, 75), #second platform was 100,20
-                 (350, 200, 75,75), #second last platform was 100,20
-                 (175, 100, 75, 75), #last platform was 100,20
+                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform (was 100,20)
+                 (125, HEIGHT - 400, 75, 75), #second platform
                  (0,500,75,75), #third
-                 (825,500,75,75),
-                 (650,300,75,75)] #fourth
+                 (825,500,75,75), #fourth
+                 (650,300,75,75), #fifth
+                 (350, 200, 75,75), #sixth
+                 (175, 100, 75, 75)] #seventh
+
 # define colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

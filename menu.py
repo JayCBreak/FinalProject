@@ -19,6 +19,7 @@ imgBtnTutorial = "./images/tutorial.png"
 imgBtnNameSet = "./images/setName.png"
 imgBtnScoreboard = "./images/scoreboard.png"
 imgBtnExit = "./images/exit.png"
+imgnothing = "./images/Nothing.png"
 
 
 
@@ -71,8 +72,8 @@ def main():
     btnCharacter = Button(imgBtnCharacter, 200, 725, "./images/darkcharacter.png")
     btnScoreboard = Button(imgBtnScoreboard, 200, 805, "./images/darkscoreboard.png")
     btnExit = Button(imgBtnExit, 200, 890, "./images/darkexit.png")
-    #secretdoor = Button()
-    allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnScoreboard, btnExit, sprTWizard, sprTTower)
+    secretdoor = Button(imgnothing, 677, 833, "./images/blackbox.jpg")
+    allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnScoreboard, btnExit, secretdoor, sprTWizard, sprTTower)
     background = pygame.image.load(imgBackground)
     screen.blit(background, (0, 0))
 
@@ -93,6 +94,8 @@ def main():
                     game("character")
                 elif btnScoreboard.click():
                     game("scoreboard")
+                elif secretdoor.click():
+                    print("Ricky dicky")
                 elif btnExit.click():
                     running = False
         pygame.display.flip()

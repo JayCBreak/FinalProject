@@ -43,7 +43,7 @@ class ArrowLeft(pygame.sprite.Sprite):
         self.rect.centery = self.ycord
 
     def update(self):
-        self.rect.centerx -= 7
+        self.rect.centerx -= 10
         if self.rect.x <= -100:
             self.rect.x = self.xcord -70
         #pass
