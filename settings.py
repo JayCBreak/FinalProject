@@ -22,6 +22,8 @@ PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (350, 200, 75,75), #sixth
                  (175, 100, 75, 75)] #seventh
 
+
+
 # define colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

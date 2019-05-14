@@ -51,7 +51,7 @@ class ArrowRight(pygame.sprite.Sprite):
 
 
 
-
+"""
 def main():
     screen = pygame.display.set_mode((900, 1000))
 
@@ -96,4 +96,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+"""

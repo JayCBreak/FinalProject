@@ -8,11 +8,10 @@ class Player(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((30, 30))
-        #self.image = pg.image.load(r'T:\EAS-ICS4U1-1\COMMON\BrandonJacobTreyWilliam\GitHub\FinalProject\images\b\run\tile004.png')
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.pos = vec(WIDTH / 2, HEIGHT / 2)
+        self.pos = vec(WIDTH / 6, HEIGHT / 1)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
@@ -52,12 +51,11 @@ class Player2(pg.sprite.Sprite):
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
-        self.image = pg.Surface((40, 40))
-        #self.image = pg.image.load(r'T:\EAS-ICS4U1-1\COMMON\BrandonJacobTreyWilliam\GitHub\FinalProject\images\b\run\tile004.png')
+        self.image = pg.Surface((30, 30))
         self.image.fill(BLUE)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.pos = vec(WIDTH / 2, HEIGHT / 2)
+        self.pos = vec(WIDTH - 200, HEIGHT / 1)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 

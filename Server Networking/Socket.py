@@ -1,35 +1,30 @@
-""" Wizard Tower Server-side Code"""
-import socket
-import sys
+from socket import *
+from threading import Thread
 
-
-def main():
-    host = ""       # Sets the host address to the default
-    port = 8888     # Sets the port to 8888 which is port forwarded
-    players = 100       # Sets the number of players
-
-    mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    # Creates the socket
-    print ('Socket has been created')
-
-    try:        # Tries to bind to the socket, if it fails then it reports the error message
-        mySocket.bind((host, port))
-    except socket.error as message:
-        print ('Bind failed. Error Code : ' + str(message[0]) + ' Message ' + message[1])
-        sys.exit()
-    print('Socket binding has been completed successfully.')
-
-    mySocket.listen(players)    # This states how many people are allowed to join
-    conn, adr = mySocket.accept()       # Allows for connections
-    print("Connection from: " + str(adr))
-    while True:     # This section handles data de/encoding and sending
-        data = conn.recv(1024).decode()
+def clientHandler():
+    conn, addr = s.accept()
+    print addr, "is Connected"
+    while 1:
+        data = conn.recv(1024)
         if not data:
-            print("No data Received")
-        print("From connected User: " + str(data))
+            break
+        print "Received Message", repr(data)
 
-        print("Sending: " + str(data))
-        conn.send(data.encode())
 
-    conn.close()
+HOST = '' #localhost
+PORT = 8000
 
-main()
+s = socket(AF_INET, SOCK_STREAM)
+s.bind((HOST, PORT))
+s.listen(5)
+
+print "Server is running......"
+
+#Thread(target=clientHandler).start()
+#Thread(target=clientHandler).start()
+#Thread(target=clientHandler).start()
+
+for i in range(5):
+    Thread(target=clientHandler).start()
+
+s.close()
