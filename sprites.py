@@ -8,7 +8,7 @@ class Player(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((30, 30))
-        self.image.fill(RED)
+        self.image.fill(PINK)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH / 6, HEIGHT / 1)
@@ -89,6 +89,47 @@ class Player2(pg.sprite.Sprite):
         self.rect.midbottom = self.pos
 
 
+class Player3(pg.sprite.Sprite):
+    def __init__(self, game):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        self.image = pg.Surface((30, 30))
+        self.image.fill(WHITE)
+        self.rect = self.image.get_rect()
+        self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        self.pos = vec(WIDTH - 200, HEIGHT / 1)
+        self.vel = vec(0, 0)
+        self.acc = vec(0, 0)
+
+    def jump(self):
+        # jump only if standing on a platform, gravity
+        self.rect.x += 1
+        hits = pg.sprite.spritecollide(self, self.game.platforms, False)
+        self.rect.x -= 1
+        if hits:
+            self.vel.y = -20
+
+    def update(self): #movement
+        self.acc = vec(0, PLAYER2_GRAV)
+        keys = pg.key.get_pressed()
+        if keys[pg.K_h]:
+            self.acc.x = -PLAYER2_ACC
+        if keys[pg.K_k]:
+            self.acc.x = PLAYER2_ACC
+
+        # apply friction
+        self.acc.x += self.vel.x * PLAYER2_FRICTION
+        # equations of motion
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc
+        # wrap around the sides of the screen
+        if self.pos.x > WIDTH:
+            self.pos.x = 0
+        if self.pos.x < 0:
+            self.pos.x = WIDTH
+
+        self.rect.midbottom = self.pos
+
 
 
 class Platform(pg.sprite.Sprite):
@@ -99,3 +140,14 @@ class Platform(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+
+
+class Wall(pg.sprite.Sprite):
+    def __int__(self, x, y, w, h):
+        pg.sprite.Sprite.__init__(self)
+        self.image = pg.Surface((w, h))
+        self.image.fill(DARKGREY)
+        self.rect = self.image.get_rect()
+        self.rect.x = 10
+        self.rect.y = 40

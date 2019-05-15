@@ -1,61 +1,108 @@
-import pygame
-import sys
+"""Game Development with Pygame
+Wizard Tower Main Game code
+"""
+import pygame as pg
+from settings import *
+from sprites import *
 
-screenWidth = 900
-screenHeight = 1000
-FPS = 60
+class Game:
+    def __init__(self):
+        # initialize game window, etc
+        pg.init()
+        pg.mixer.init()
+        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        pg.display.set_caption(TITLE)
+        self.clock = pg.time.Clock()
+        self.running = True
 
-class Character(pygame.sprite.Sprite):
-    def __init__(self, wizard):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((300, 500)) #Size of Sprite
-        self.image = pygame.image.load("./images/"+wizard+"/Idle/tile000.png")
-        self.rect = self.image.get_rect() #Insert Character sprites
-        self.dx = 6
-        self.dy = 6
+    def new(self):
+        # start a new game
+        self.all_sprites = pg.sprite.Group()
+        self.platforms = pg.sprite.Group()
+        """self.walls = pg.sprite.Group()"""
+        self.player = Player(self)
+        self.player2 = Player2(self)
+        self.player3 = Player3(self)
+        self.all_sprites.add(self.player)
+        self.all_sprites.add(self.player2)
+        self.all_sprites.add(self.player3)
+        for plat in PLATFORM_LIST:
+            p = Platform(*plat)
+            self.all_sprites.add(p)
+            self.platforms.add(p)
+        """for wall in WALL_LIST:
+            wa = Wall(*wall)
+            self.all_sprites.add(wa)
+            self.walls.add(wa)"""
+        self.run()
+
+
+    def run(self):
+        # Game Loop
+        self.playing = True
+        while self.playing:
+            self.clock.tick(FPS)
+            self.events()
+            self.update()
+            self.draw()
 
     def update(self):
-        self.move()
-        self.wrap()
+        # Game Loop - Update
+        self.all_sprites.update()
+        # check if player hits a platform - only if falling
+        if self.player.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.player, self.platforms, False)
+            if hits:
+                self.player.pos.y = hits[0].rect.top
+                self.player.vel.y = 0
 
-    def move(self):
-        k = pygame.key.get_pressed()
-        if k[pygame.K_a]:
-            self.rect.centerx -= self.dx
-        if k[pygame.K_d]:
-            self.rect.centerx += self.dx
-        if k[pygame.K_w]:
-            self.rect.centery -= self.dy
-        if k[pygame.K_s]:
-            self.rect.centery += self.dy
+        if self.player2.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.player2, self.platforms, False)
+            if hits:
+                self.player2.pos.y = hits[0].rect.top
+                self.player2.vel.y = 0
 
-    def wrap(self):
-        if self.rect.left > screen.get_width():
-            self.rect.right = 0
-        if self.rect.right < 0:
-            self.rect.left = screen.get_width()
-        if self.rect.top > screen.get_height():
-            self.rect.bottom = 0
-        if self.rect.bottom < 0:
-            self.rect.top = screen.get_height()
+        if self.player3.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.player3, self.platforms, False)
+            if hits:
+                self.player3.pos.y = hits[0].rect.top
+                self.player3.vel.y = 0
 
-def main():
-    pygame.init()
-    pygame.mixer.init()
-    screen = pygame.display.set_mode((screenWidth, screenHeight))
-    pygame.display.set_caption("Wizard Tower Game")
-    clock = pygame.time.Clock()
-    wizard = Character("b")
+    def events(self):
+        # Game Loop - events
+        for event in pg.event.get():
+            # check for closing window
+            if event.type == pg.QUIT:
+                if self.playing:
+                    self.playing = False
+                self.running = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_w:
+                    self.player.jump()
+                if event.key == pg.K_UP:
+                    self.player2.jump()
+                if event.key == pg.K_u:
+                    self.player3.jump()
 
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-        wizard.move()
+    def draw(self):
+        # Game Loop - draw
+        self.screen.fill(BLACK)
+        self.all_sprites.draw(self.screen)
+        # *after* drawing everything, flip the display
+        pg.display.flip()
 
-    print("This would connect to the server which is running the game, sending the variable username, character and also send xy data.")
+    def show_start_screen(self):
+        # game splash/start screen
+        pass
 
+    def show_go_screen(self):
+        # game over/continue
+        pass
 
-main()
+g = Game()
+g.show_start_screen()
+while g.running:
+    g.new()
+    g.show_go_screen()
+
+pg.quit()

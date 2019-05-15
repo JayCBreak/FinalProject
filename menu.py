@@ -7,7 +7,7 @@ import webbrowser
 screenWidth = 900
 screenHeight = 1000
 FPS = 60
-randBackground = random.randint(0, 100)
+randBackground = random.randint(0, 1)
 if randBackground == 1:
     imgBackground = "./images/WizardTowerArm.png"
 else:
@@ -18,7 +18,6 @@ imgBtnPlay = "./images/play.png"
 imgBtnCharacter = "./images/character.png"
 imgBtnTutorial = "./images/tutorial.png"
 imgBtnNameSet = "./images/setName.png"
-imgBtnScoreboard = "./images/scoreboard.png"
 imgBtnExit = "./images/exit.png"
 imgdoor = "./images/dooR.png"
 
@@ -33,8 +32,8 @@ class Button(pygame.sprite.Sprite):
         self.image = pygame.image.load(image)
         self.imageName = image
         self.darkIMage = darkImage
-        self.center = (x,y)
-        self.background = (0,255,255)
+        self.center = (x, y)
+        self.background = (0, 255, 255)
         self.mouse = pygame.mouse.get_pos()
 
     def update(self):
@@ -66,14 +65,13 @@ def main():
     clock = pygame.time.Clock()
     sprTWizard = Button(imgSprTWizard, 320, 90, "./images/tWizard.png")
     sprTTower = Button(imgSPRTTower, 620, 240, "./images/tTower.png")
-    btnPlay = Button(imgBtnPlay, 215, 415, "./images/darkplay.png")
-    btnTutorial = Button(imgBtnTutorial, 200, 555, "./images/darktutorial.png")
-    btnNameSet = Button(imgBtnNameSet, 200, 640, "./images/darksetName.png")
-    btnCharacter = Button(imgBtnCharacter, 200, 725, "./images/darkcharacter.png")
-    btnScoreboard = Button(imgBtnScoreboard, 200, 805, "./images/darkscoreboard.png")
+    btnPlay = Button(imgBtnPlay, 215, 480, "./images/darkplay.png")
+    btnTutorial = Button(imgBtnTutorial, 200, 640, "./images/darktutorial.png")
+    btnNameSet = Button(imgBtnNameSet, 200, 725, "./images/darksetName.png")
+    btnCharacter = Button(imgBtnCharacter, 200, 810, "./images/darkcharacter.png")
     btnExit = Button(imgBtnExit, 200, 890, "./images/darkexit.png")
     secretdoor = Button(imgdoor, 669, 847, "./images/dooR.png")
-    allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnScoreboard, btnExit, secretdoor, sprTWizard, sprTTower)
+    allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnExit, secretdoor, sprTWizard, sprTTower)
     background = pygame.image.load(imgBackground)
     screen.blit(background, (0, 0))
 
@@ -92,8 +90,6 @@ def main():
                     game("nameSet")
                 elif btnCharacter.click():
                     game("character")
-                elif btnScoreboard.click():
-                    game("scoreboard")
                 elif secretdoor.click():
                     counterfunny = 1
                     while counterfunny <= 50:
@@ -107,6 +103,7 @@ def main():
         allSprites.update()
         allSprites.draw(screen)
 
+
 def game(play = "play"):
     if play == "play":
         subprocess.Popen("python game.py")
@@ -115,7 +112,7 @@ def game(play = "play"):
         subprocess.Popen("python tutorial.py")
     elif play == "nameSet":
         username = easygui.enterbox("Please Enter your preferred Username.", "Set Your Username")
-        if username == None:
+        if username is None:
             username = "player"
         else:
             username = username
@@ -123,8 +120,6 @@ def game(play = "play"):
     elif play == "character":
         print("This would change the players character model.")
         charModel = easygui.buttonbox("Please choose your favorite wizard!", "Choose Your Character!", ["Pink", "White", "Green", "Blue"], image="./images/wizardSelect.png")
-    elif play == "scoreboard":
-        subprocess.Popen("python scoreboard.py")
 
 
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!\n\n\n\n\n\n\n\n")

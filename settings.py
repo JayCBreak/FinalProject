@@ -22,6 +22,9 @@ PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (350, 200, 75,75), #sixth
                  (175, 100, 75, 75)] #seventh
 
+WALL_LIST = [(10, HEIGHT -100, WIDTH, 40),
+             (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75),
+             (125, HEIGHT - 400, 75, 75)]
 
 
 # define colors
@@ -32,5 +35,6 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 LIGHTBLUE = (0, 155, 155)
+PINK = (255,20,147)
 LIGHTGREY = (128,128,128)
 DARKGREY = (169,169,169)

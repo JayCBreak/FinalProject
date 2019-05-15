@@ -9,8 +9,7 @@ class ClientSend:
         self.p = 8888
 
     def send(self,  xCoord=-20, yCoord=-20, level=0, mySocket=socket.socket()):
-        message = str([self.n, self.w,  xCoord, yCoord, level])
-        mySocket.send(message.encode())
+        mySocket.send(str([self.n, self.w,  xCoord, yCoord, level]).encode())
 
 
 def main():
@@ -20,11 +19,14 @@ def main():
     mySocket = socket.socket()
     mySocket.connect((host, port))
     print("Connection Successful")
-    client = ClientSend("w", "Clearly Not BOb")
+    client = ClientSend("w", "I AM GOD")
     while True:
         client.send(20, 61, 0, mySocket)
         data = mySocket.recv(1024).decode()
         print('Received from server: ' + data)
+        end = input(">>")
+        if end == "e":
+            break
 
     mySocket.close()
 

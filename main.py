@@ -19,6 +19,7 @@ class Game:
         # start a new game
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
+        self.walls = pg.sprite.Group()
         self.player = Player(self)
         self.player2 = Player2(self)
         self.all_sprites.add(self.player)
@@ -27,7 +28,12 @@ class Game:
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
+        for wall in WALL_LIST:
+            wa = Wall(*wall)
+            self.all_sprites.add(wa)
+            self.walls.add(wa)
         self.run()
+
 
     def run(self):
         # Game Loop
