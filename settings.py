@@ -9,9 +9,6 @@ PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.10
 PLAYER_GRAV = 0.8
 
-PLAYER2_ACC = 0.5
-PLAYER2_FRICTION = -0.10
-PLAYER2_GRAV = 0.8
 # Starting platforms (x,y,blockx,blocky)
 PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform (was 100,20)
@@ -34,7 +31,8 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
-LIGHTBLUE = (0, 155, 155)
-PINK = (255,20,147)
+LIGHTBLUE = (0, 255, 255)
+PINK = (255,20,255)
 LIGHTGREY = (128,128,128)
 DARKGREY = (169,169,169)
+PURPLE = (153,50,204)
