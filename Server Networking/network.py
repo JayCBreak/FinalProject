@@ -19,14 +19,14 @@ def main():
     mySocket = socket.socket()
     mySocket.connect((host, port))
     print("Connection Successful")
-    client = ClientSend("w", "I AM GOD")
+    client = ClientSend("y", "I AM not GOD hehe")
     while True:
         client.send(20, 61, 0, mySocket)
         data = mySocket.recv(1024).decode()
         print('Received from server: ' + data)
-        end = input(">>")
-        if end == "e":
-            break
+        #end = input(">>")
+        #if end == "e":
+         #   break
 
     mySocket.close()
 

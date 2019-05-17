@@ -9,6 +9,7 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(PINK)
+        self.image = pg.image.load("./images/p/Run/tile004.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH / 6, HEIGHT / 1)
@@ -52,7 +53,8 @@ class Player2(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((30, 30))
-        self.image.fill(LIGHTBLUE)
+        self.image.fill(GREEN)
+        self.image = pg.image.load("./images/g/Run/tile004.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH - 650, HEIGHT / 1)
@@ -95,6 +97,7 @@ class Player3(pg.sprite.Sprite):
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(WHITE)
+        self.image = pg.image.load("./images/w/Run/tile004.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH - 200, HEIGHT / 1)
@@ -138,6 +141,7 @@ class Player4(pg.sprite.Sprite):
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(PURPLE)
+        self.image = pg.image.load("./images/b/Run/tile004.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH - 100, HEIGHT / 1)

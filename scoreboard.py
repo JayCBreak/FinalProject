@@ -1,6 +1,9 @@
-class Scoreboard():
+import pygame
+
+class Scoreboard(pygame.sprite.Sprite):
 
     def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
         self.player1scorefull = 0
         self.player2scorefull = 0
         self.player3scorefull = 0
@@ -23,8 +26,20 @@ class Scoreboard():
         print(player1pos, player2pos, player3poos, player4pos)
         print(player1scorefull, player2scorefull, player3scorefull, player4scorefull)
         score()
+        drawscoreboard()
 
     def drawscoreboard(self):
+
+        self.font = pygame.font.Font("Chomsky.woff", 30)
+        self.text = "                                                  Player1: %d" % (self.player1scorefull)
+        self.image = self.font.render(self.text, 1, (0, 0, 0))
+        self.rect = self.image.get_rect()
+
+
+
+        #display_surface.blit(scoretext, scorebox)
+
+
 
 
 

@@ -3,12 +3,13 @@ from threading import Thread
 
 def clientHandler():
     conn, addr = s.accept()
-    print addr, "is Connected"
+    print(addr, "is Connected")
     while 1:
         data = conn.recv(1024)
         if not data:
-            break
-        print "Received Message", repr(data)
+            s.close()
+            print(addr, "has Disconnected")
+        print("Received Message", repr(data))
 
 
 HOST = '' #localhost
@@ -18,7 +19,7 @@ s = socket(AF_INET, SOCK_STREAM)
 s.bind((HOST, PORT))
 s.listen(5)
 
-print "Server is running......"
+print("Server is running......")
 
 #Thread(target=clientHandler).start()
 #Thread(target=clientHandler).start()

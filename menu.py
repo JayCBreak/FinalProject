@@ -7,7 +7,7 @@ import webbrowser
 screenWidth = 900
 screenHeight = 1000
 FPS = 60
-randBackground = random.randint(0, 1)
+randBackground = random.randint(0, 100)
 if randBackground == 1:
     imgBackground = "./images/WizardTowerArm.png"
 else:
@@ -119,7 +119,7 @@ def game(play = "play"):
         print("Thank you for setting your username to "+username+"!")
     elif play == "character":
         print("This would change the players character model.")
-        charModel = easygui.buttonbox("Please choose your favorite wizard!", "Choose Your Character!", ["Pink", "White", "Green", "Blue"], image="./images/wizardSelect.png")
+        charModel = easygui.buttonbox("Please choose your favorite wizard!", "Choose Your Character!", ["Pink", "White", "Green", "Purple"], image="./images/wizardSelect.png")
 
 
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!\n\n\n\n\n\n\n\n")

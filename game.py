@@ -21,6 +21,7 @@ class Game:
         # start a new game
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
+
         """self.walls = pg.sprite.Group()"""
         self.player = Player(self)
         self.player2 = Player2(self)
@@ -99,9 +100,10 @@ class Game:
 
     def draw(self):
         # Game Loop - draw
-        #self.scoreboard.updateScores(self.player.pos.y, self.player2.pos.y, self.player3.pos.y, self.player4.pos.y)
+        """self.scoreboard.updateScores(self.player.pos.y, self.player2.pos.y, self.player3.pos.y, self.player4.pos.y)"""
         self.screen.fill(BLACK)
         self.all_sprites.draw(self.screen)
+        """self.display_surface.blit(scoretext, scorebox)"""
         # *after* drawing everything, flip the display
         pg.display.flip()
 
