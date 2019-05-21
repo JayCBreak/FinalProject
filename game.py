@@ -1,10 +1,35 @@
 """Game Development with Pygame
 Wizard Tower Main Game code
 """
+import socket
 import pygame as pg
 from settings import *
 from sprites import *
+from threading import Thread
+import queue
 #from scoreboard import Scoreboard
+
+
+class ClientSend:
+    def __init__(self, wizard="b", username="Bob", xCoord=-20, yCoord=-20, level=0):
+
+        host = '174.93.72.251'
+        port = 8888
+        mySocket = socket.socket()
+        mySocket.connect((host, port))
+        print("Connection Successful")
+        self.send()
+
+def send(self, wizard="b", username="bob", q):
+    self.w = wizard
+    self.n = username
+    self.x = q.get()
+    self.y = yCoord
+    self.l = level
+    mySocket.send(str([self.n, self.w,  self.x, self.y, self.l]).encode())
+    data = mySocket.recv(1024).decode()
+    print('Received from server: ' + data)
+
 
 class Game:
     def __init__(self):
@@ -90,7 +115,7 @@ class Game:
                 self.running = False
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_w:
-                    self.player.jump()
+                    self.player.jump() #put the jump animation here
                 if event.key == pg.K_t:
                     self.player2.jump()
                 if event.key == pg.K_i:
@@ -101,11 +126,12 @@ class Game:
     def draw(self):
         # Game Loop - draw
         """self.scoreboard.updateScores(self.player.pos.y, self.player2.pos.y, self.player3.pos.y, self.player4.pos.y)"""
-        self.screen.fill(BLACK)
+        self.screen.fill(WHITE)
         self.all_sprites.draw(self.screen)
         """self.display_surface.blit(scoretext, scorebox)"""
         # *after* drawing everything, flip the display
         pg.display.flip()
+        q.put(self.player.pos.x, self.player.vel.y)
 
     def show_start_screen(self):
         # game splash/start screen
@@ -115,6 +141,8 @@ class Game:
         # game over/continue
         pass
 
+q = queue.Queue
+Thread(target=send, args=("Wizard", "Username", q)).start()
 g = Game()
 g.show_start_screen()
 while g.running:
@@ -122,3 +150,4 @@ while g.running:
     g.show_go_screen()
 
 pg.quit()
+mySocket.close()

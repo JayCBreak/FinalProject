@@ -3,13 +3,13 @@ import pygame as pg
 from settings import *
 vec = pg.math.Vector2
 
-class Player(pg.sprite.Sprite):
+class Player(pg.sprite.Sprite): #Pink
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(PINK)
-        self.image = pg.image.load("./images/p/Run/tile004.png")
+        self.image = pg.image.load("./images/p/Idle/tile000.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH / 6, HEIGHT / 1)
@@ -31,7 +31,8 @@ class Player(pg.sprite.Sprite):
             self.acc.x = -PLAYER_ACC
         if keys[pg.K_d]:
             self.acc.x = PLAYER_ACC
-
+            self.image = pg.image.load("./images/b/Run/tile005.png")
+            
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         # equations of motion
@@ -48,13 +49,13 @@ class Player(pg.sprite.Sprite):
 
 
 
-class Player2(pg.sprite.Sprite):
+class Player2(pg.sprite.Sprite): #Green
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(GREEN)
-        self.image = pg.image.load("./images/g/Run/tile004.png")
+        self.image = pg.image.load("./images/g/Idle/tile000.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH - 650, HEIGHT / 1)
@@ -76,6 +77,7 @@ class Player2(pg.sprite.Sprite):
             self.acc.x = -PLAYER_ACC
         if keys[pg.K_h]:
             self.acc.x = PLAYER_ACC
+            self.image = pg.image.load("./images/g/Run/tile005.png")
 
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
@@ -91,13 +93,13 @@ class Player2(pg.sprite.Sprite):
         self.rect.midbottom = self.pos
 
 
-class Player3(pg.sprite.Sprite):
+class Player3(pg.sprite.Sprite): #White
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(WHITE)
-        self.image = pg.image.load("./images/w/Run/tile004.png")
+        self.image = pg.image.load("./images/w/Idle/tile000.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH - 200, HEIGHT / 1)
@@ -119,6 +121,8 @@ class Player3(pg.sprite.Sprite):
             self.acc.x = -PLAYER_ACC
         if keys[pg.K_l]:
             self.acc.x = PLAYER_ACC
+            self.image = pg.image.load("./images/w/Run/tile005.png")
+
 
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
@@ -135,13 +139,13 @@ class Player3(pg.sprite.Sprite):
 
 
 
-class Player4(pg.sprite.Sprite):
+class Player4(pg.sprite.Sprite): #Purple
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(PURPLE)
-        self.image = pg.image.load("./images/b/Run/tile004.png")
+        self.image = pg.image.load("./images/b/Idle/tile000.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH - 100, HEIGHT / 1)
@@ -163,6 +167,8 @@ class Player4(pg.sprite.Sprite):
             self.acc.x = -PLAYER_ACC
         if keys[pg.K_RIGHT]:
             self.acc.x = PLAYER_ACC
+            self.image = pg.image.load("./images/b/Run/tile005.png")
+
 
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION

@@ -19,9 +19,41 @@ PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (350, 200, 75,75), #sixth
                  (175, 100, 75, 75)] #seventh
 
-WALL_LIST = [(10, HEIGHT -100, WIDTH, 40),
+PLATFORM_LIST2 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
+                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
+                 (125, HEIGHT - 400, 75, 75), #second platform
+                 (0,500,75,75), #third
+                 (825,500,75,75), #fourth
+                 (650,300,75,75), #fifth
+                 (350, 200, 75,75), #sixth
+                 (175, 100, 75, 75)] #seventh
+
+PLATFORM_LIST3 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
+                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
+                 (125, HEIGHT - 400, 75, 75), #second platform
+                 (0,500,75,75), #third
+                 (825,500,75,75), #fourth
+                 (650,300,75,75), #fifth
+                 (350, 200, 75,75), #sixth
+                 (175, 100, 75, 75)] #seventh
+
+PLATFORM_LIST4 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
+                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
+                 (125, HEIGHT - 400, 75, 75), #second platform
+                 (0,500,75,75), #third
+                 (825,500,75,75), #fourth
+                 (650,300,75,75), #fifth
+                 (350, 200, 75,75), #sixth
+                 (175, 100, 75, 75)] #seventh
+
+
+
+
+
+
+"""WALL_LIST = [(10, HEIGHT -100, WIDTH, 40),
              (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75),
-             (125, HEIGHT - 400, 75, 75)]
+             (125, HEIGHT - 400, 75, 75)]"""
 
 
 # define colors
