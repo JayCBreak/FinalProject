@@ -2,37 +2,40 @@
 Wizard Tower Main Game code
 """
 import socket
+import queue
 import pygame as pg
 from settings import *
 from sprites import *
 from threading import Thread
-import queue
 #from scoreboard import Scoreboard
 
 
 class ClientSend:
-    def __init__(self, wizard="b", username="Bob", xCoord=-20, yCoord=-20, level=0):
-
+    def __init__(self, wizard="b", username="Bob", q=queue.Queue()):
+        self.w = wizard
+        self.n = username
+        self.q = q
         host = '174.93.72.251'
         port = 8888
-        mySocket = socket.socket()
-        mySocket.connect((host, port))
-        print("Connection Successful")
-        self.send()
+        self.mySocket = socket.socket()
+        try:
+            self.mySocket.connect((host, port))
+            print("Connection Successful at: "+str(host)+":"+str(port))
+        except:
+            print("Unable to connect to server at: "+str(host)+":"+str(port))
 
-def send(self, wizard="b", username="bob", q):
-    self.w = wizard
-    self.n = username
-    self.x = q.get()
-    self.y = yCoord
-    self.l = level
-    mySocket.send(str([self.n, self.w,  self.x, self.y, self.l]).encode())
-    data = mySocket.recv(1024).decode()
-    print('Received from server: ' + data)
+    def send(self, level=0):
+        self.x = self.q.get()
+        self.y = self.q.get()
+        self.l = level
+        self.mySocket.send(str([self.n, self.w,  self.x, self.y, self.l]).encode())
+        data = self.mySocket.recv(1024).decode()
+        print('Received from server: ' + data)
 
 
 class Game:
     def __init__(self):
+        self.q = queue.Queue()
         # initialize game window, etc
         pg.init()
         pg.mixer.init()
@@ -131,7 +134,8 @@ class Game:
         """self.display_surface.blit(scoretext, scorebox)"""
         # *after* drawing everything, flip the display
         pg.display.flip()
-        q.put(self.player.pos.x, self.player.vel.y)
+        self.q.put(self.player.pos.x)
+        self.q.put(self.player.vel.y)
 
     def show_start_screen(self):
         # game splash/start screen
@@ -141,13 +145,23 @@ class Game:
         # game over/continue
         pass
 
-q = queue.Queue
-Thread(target=send, args=("Wizard", "Username", q)).start()
-g = Game()
-g.show_start_screen()
-while g.running:
-    g.new()
-    g.show_go_screen()
 
-pg.quit()
-mySocket.close()
+def main():
+    g = Game()
+    g.show_start_screen()
+    while g.running:
+        g.new()
+        g.show_go_screen()
+
+    pg.quit()
+
+
+def network(wizard="b", username="bob"):
+    s = ClientSend(wizard, username)
+    while True:
+        s.send()
+
+
+Thread(target=network, args=("Wizard", "Username")).start()
+
+main()
