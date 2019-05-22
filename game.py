@@ -7,35 +7,12 @@ import pygame as pg
 from settings import *
 from sprites import *
 from threading import Thread
-#from scoreboard import Scoreboard
-
-
-class ClientSend:
-    def __init__(self, wizard="b", username="Bob", q=queue.Queue()):
-        self.w = wizard
-        self.n = username
-        self.q = q
-        host = '174.93.72.251'
-        port = 8888
-        self.mySocket = socket.socket()
-        try:
-            self.mySocket.connect((host, port))
-            print("Connection Successful at: "+str(host)+":"+str(port))
-        except:
-            print("Unable to connect to server at: "+str(host)+":"+str(port))
-
-    def send(self, level=0):
-        self.x = self.q.get()
-        self.y = self.q.get()
-        self.l = level
-        self.mySocket.send(str([self.n, self.w,  self.x, self.y, self.l]).encode())
-        data = self.mySocket.recv(1024).decode()
-        print('Received from server: ' + data)
-
+from time import sleep
+from scoreboard import Scoreboard
 
 class Game:
-    def __init__(self):
-        self.q = queue.Queue()
+    def __init__(self, q):
+        self.q = q
         # initialize game window, etc
         pg.init()
         pg.mixer.init()
@@ -43,7 +20,7 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
-        #self.scoreboard = Scoreboard()
+        self.scoreboard = Scoreboard()
 
     def new(self):
         # start a new game
@@ -59,7 +36,6 @@ class Game:
         self.all_sprites.add(self.player2)
         self.all_sprites.add(self.player3)
         self.all_sprites.add(self.player4)
-        #self.all_sprites.add(self.scoreboard)
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
             self.all_sprites.add(p)
@@ -118,7 +94,7 @@ class Game:
                 self.running = False
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_w:
-                    self.player.jump() #put the jump animation here
+                    self.player.jump() #put the jump animation herea
                 if event.key == pg.K_t:
                     self.player2.jump()
                 if event.key == pg.K_i:
@@ -128,14 +104,19 @@ class Game:
 
     def draw(self):
         # Game Loop - draw
-        """self.scoreboard.updateScores(self.player.pos.y, self.player2.pos.y, self.player3.pos.y, self.player4.pos.y)"""
-        self.screen.fill(WHITE)
+        self.scoreboard.updateScores(self.player.pos.y, self.player2.pos.y, self.player3.pos.y, self.player4.pos.y)
+        self.screen.fill(DARKGREY)
         self.all_sprites.draw(self.screen)
-        """self.display_surface.blit(scoretext, scorebox)"""
+        self.scoreboard.drawscoreboard(self.screen)
         # *after* drawing everything, flip the display
         pg.display.flip()
-        self.q.put(self.player.pos.x)
-        self.q.put(self.player.vel.y)
+        #send = 0
+        #send += 1
+        #if send % 10 == 0:
+        q.queue.clear()
+        q.put(self.player.pos.x)
+        q.put(self.player.pos.y)
+
 
     def show_start_screen(self):
         # game splash/start screen
@@ -146,8 +127,36 @@ class Game:
         pass
 
 
-def main():
-    g = Game()
+class ClientSend:
+    def __init__(self, wizard="b", username="Bob"):
+        self.w = wizard
+        self.n = username
+        self.x = -20
+        self.y = -20
+        self.level = 0
+        host = '174.93.72.251'
+        port = 8888
+        self.mySocket = socket.socket()
+        try:
+            self.mySocket.connect((host, port))
+            print("Connection Successful at: "+str(host)+":"+str(port))
+        except:
+            print("Unable to connect to server at: "+str(host)+":"+str(port))
+
+    def send(self, level=0, q=queue.Queue()):
+        sleep(0.05)
+        self.x = q.get()
+        self.y = q.get()
+        self.level = level
+        message = str([self.n, self.w,  self.x, self.y, self.level])
+        print("Sending message: "+message)
+        self.mySocket.send(message.encode())
+        data = self.mySocket.recv(1024).decode()
+        print('Received from server: ' + data)
+
+
+def main(q=queue.Queue):
+    g = Game(q)
     g.show_start_screen()
     while g.running:
         g.new()
@@ -156,12 +165,14 @@ def main():
     pg.quit()
 
 
-def network(wizard="b", username="bob"):
+def network(wizard="b", username="bob", q=queue.Queue()):
     s = ClientSend(wizard, username)
+    level = 0
     while True:
-        s.send()
+        s.send(level, q)
 
+q = queue.Queue()
 
-Thread(target=network, args=("Wizard", "Username")).start()
+Thread(target=network, args=("Wizard", "Username", q)).start()
 
-main()
+main(q)

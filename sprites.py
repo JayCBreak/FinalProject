@@ -3,7 +3,7 @@ import pygame as pg
 from settings import *
 vec = pg.math.Vector2
 
-class Player(pg.sprite.Sprite): #Pink
+class Player(pg.sprite.Sprite): #Pink Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -29,9 +29,10 @@ class Player(pg.sprite.Sprite): #Pink
         keys = pg.key.get_pressed()
         if keys[pg.K_a]:
             self.acc.x = -PLAYER_ACC
+            self.image = pg.image.load("./images/p/Run/tile005LEFT.png")
         if keys[pg.K_d]:
             self.acc.x = PLAYER_ACC
-            self.image = pg.image.load("./images/b/Run/tile005.png")
+            self.image = pg.image.load("./images/p/Run/tile005.png")
 
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
@@ -49,7 +50,7 @@ class Player(pg.sprite.Sprite): #Pink
 
 
 
-class Player2(pg.sprite.Sprite): #Green
+class Player2(pg.sprite.Sprite): #Green Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -75,6 +76,7 @@ class Player2(pg.sprite.Sprite): #Green
         keys = pg.key.get_pressed()
         if keys[pg.K_f]:
             self.acc.x = -PLAYER_ACC
+            self.image = pg.image.load("./images/g/Run/tile005LEFT.png")
         if keys[pg.K_h]:
             self.acc.x = PLAYER_ACC
             self.image = pg.image.load("./images/g/Run/tile005.png")
@@ -93,7 +95,7 @@ class Player2(pg.sprite.Sprite): #Green
         self.rect.midbottom = self.pos
 
 
-class Player3(pg.sprite.Sprite): #White
+class Player3(pg.sprite.Sprite): #White Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -119,6 +121,7 @@ class Player3(pg.sprite.Sprite): #White
         keys = pg.key.get_pressed()
         if keys[pg.K_j]:
             self.acc.x = -PLAYER_ACC
+            self.image = pg.image.load("./images/w/Run/tile005LEFT.png")
         if keys[pg.K_l]:
             self.acc.x = PLAYER_ACC
             self.image = pg.image.load("./images/w/Run/tile005.png")
@@ -139,7 +142,7 @@ class Player3(pg.sprite.Sprite): #White
 
 
 
-class Player4(pg.sprite.Sprite): #Purple
+class Player4(pg.sprite.Sprite): #Purple Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -165,6 +168,7 @@ class Player4(pg.sprite.Sprite): #Purple
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
             self.acc.x = -PLAYER_ACC
+            self.image = pg.image.load("./images/b/Run/tile005LEFT.png")
         if keys[pg.K_RIGHT]:
             self.acc.x = PLAYER_ACC
             self.image = pg.image.load("./images/b/Run/tile005.png")

@@ -12,7 +12,7 @@ PLAYER_GRAV = 0.8
 # Starting platforms (x,y,blockx,blocky)
 PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform (was 100,20)
-                 (125, HEIGHT - 400, 75, 75), #second platform
+                 (175, HEIGHT - 400, 75, 75), #second platform
                  (0,500,75,75), #third
                  (825,500,75,75), #fourth
                  (650,300,75,75), #fifth
