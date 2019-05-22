@@ -36,11 +36,11 @@ class Scoreboard(pygame.sprite.Sprite):
     def drawscoreboard(self):
 
         self.font = pygame.font.SysFont("Arial", 20)
-        self.text = ("                                                                                                                                                               Player1: %d" % (self.player1scorefull    ))
-        """" %d" \
-                    "                                                  Player2: &d" \
-                    "                                                  Player3: &d" \
-        "                                                  Player4: &d" )% (self.player1scorefull, self.player2scorefull, self.player3scorefull, self.player4scorefull)"""
+        self.text = ("                                                                                                                                                               Player1: %d\n"
+                     "                                                                                                                                                               Player2: %d\n"
+                     "                                                                                                                                                               Player3: %d\n"
+                     "                                                                                                                                                               Player4: %d"
+                     % (self.player1scorefull, self.player2scorefull, self.player3scorefull, self.player4scorefull))
         self.image = self.font.render(self.text, 1, (0, 0, 0))
         self.rect = self.image.get_rect()
 
@@ -61,7 +61,7 @@ def main():
     screen.blit(background, (0,0))
 
     scoreboard = Scoreboard()
-    scoreboard.updateScores(10,101,10,10)
+    scoreboard.updateScores(10,101,250,590)
     #scoreboard.drawscoreboard()#***How to spawn a arrow left in***
 
     arrowrightstuff = pygame.sprite.Group(scoreboard)

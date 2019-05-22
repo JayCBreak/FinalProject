@@ -32,7 +32,7 @@ class Player(pg.sprite.Sprite): #Pink
         if keys[pg.K_d]:
             self.acc.x = PLAYER_ACC
             self.image = pg.image.load("./images/b/Run/tile005.png")
-            
+
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         # equations of motion
