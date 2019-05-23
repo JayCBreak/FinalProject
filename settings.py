@@ -17,7 +17,20 @@ PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (825,500,75,75), #fourth
                  (650,300,75,75), #fifth
                  (350, 200, 75,75), #sixth
-                 (175, 100, 75, 75)] #seventh
+                 (175, 100, 75, 75), #seventh
+                 (0,100,75,75)] #eighth
+
+PLATFORM_LIST1 = [(350, HEIGHT - 40, 500, 40), #base floor SHOULD BE 150
+                 (600, 750, 75, 75), #first platform
+                 (800, 500, 75, 75), #second platform
+                 (600,400,75,75), #third
+                 (225,600,75,75), #fourth
+                 (175,500,75,75), #fifth
+                 (0, 200, 75,75), #sixth
+                 (200, 100, 75, 75),#seventh
+                 (275,100,75,75), #eight
+                  (350,100,75,75), #nine
+                  (750,100,75,75)] #final
 
 PLATFORM_LIST2 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
@@ -29,15 +42,6 @@ PLATFORM_LIST2 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (175, 100, 75, 75)] #seventh
 
 PLATFORM_LIST3 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
-                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
-                 (125, HEIGHT - 400, 75, 75), #second platform
-                 (0,500,75,75), #third
-                 (825,500,75,75), #fourth
-                 (650,300,75,75), #fifth
-                 (350, 200, 75,75), #sixth
-                 (175, 100, 75, 75)] #seventh
-
-PLATFORM_LIST4 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
                  (125, HEIGHT - 400, 75, 75), #second platform
                  (0,500,75,75), #third

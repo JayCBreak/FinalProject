@@ -34,6 +34,7 @@ class Player(pg.sprite.Sprite): #Pink Wizard
             self.acc.x = PLAYER_ACC
             self.image = pg.image.load("./images/p/Run/tile005.png")
 
+
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         # equations of motion
@@ -50,7 +51,7 @@ class Player(pg.sprite.Sprite): #Pink Wizard
 
 
 
-class Player2(pg.sprite.Sprite): #Green Wizard
+class Player1(pg.sprite.Sprite): #Green Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -81,6 +82,7 @@ class Player2(pg.sprite.Sprite): #Green Wizard
             self.acc.x = PLAYER_ACC
             self.image = pg.image.load("./images/g/Run/tile005.png")
 
+
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         # equations of motion
@@ -95,7 +97,7 @@ class Player2(pg.sprite.Sprite): #Green Wizard
         self.rect.midbottom = self.pos
 
 
-class Player3(pg.sprite.Sprite): #White Wizard
+class Player2(pg.sprite.Sprite): #White Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -142,7 +144,7 @@ class Player3(pg.sprite.Sprite): #White Wizard
 
 
 
-class Player4(pg.sprite.Sprite): #Purple Wizard
+class Player3(pg.sprite.Sprite): #Purple Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -174,6 +176,7 @@ class Player4(pg.sprite.Sprite): #Purple Wizard
             self.image = pg.image.load("./images/b/Run/tile005.png")
 
 
+
         # apply friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         # equations of motion
@@ -195,6 +198,8 @@ class Platform(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((w, h))
         self.image.fill(LIGHTGREY)
+        self.image = pg.image.load("./images/Wood Block.png")
+        self.image = pg.transform.scale(self.image,(w,h))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -206,6 +211,7 @@ class Wall(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((w, h))
         self.image.fill(DARKGREY)
+        self.image = pg.image.load()
         self.rect = self.image.get_rect()
         self.rect.x = 10
         self.rect.y = 40

@@ -4,7 +4,6 @@ pygame.init()
 class Scoreboard():
 
     def __init__(self):
-        #pygame.sprite.Sprite.__init__(self)
         self.player1scorefull = 0
         self.player2scorefull = 0
         self.player3scorefull = 0
@@ -35,7 +34,6 @@ class Scoreboard():
 
     def updateScores(self, player1pos, player2pos, player3pos, player4pos):
         #print(player1pos, player2pos, player3pos, player4pos)
-        #print(self.player1scorefull, self.player2scorefull, self.player3scorefull, self.player4scorefull)
         self.lines = []
 
         self.score(player1pos, player2pos, player3pos, player4pos)
@@ -52,7 +50,6 @@ class Scoreboard():
         self.lines.append( self.font.render(self.text[1], 1, (0, 0, 0)))
         self.lines.append( self.font.render(self.text[2], 1, (0, 0, 0)))
         self.lines.append( self.font.render(self.text[3], 1, (0, 0, 0)))
-        #self.rect = self.image.get_rect()
 
 
     def drawscoreboard(self, screen):
@@ -61,7 +58,6 @@ class Scoreboard():
             screen.blit(i, (750,yPos))
             yPos += 20
 
-        #display_surface.blit(scoretext, scorebox)
 
 
 def main():
@@ -76,9 +72,6 @@ def main():
 
     scoreboard = Scoreboard()
     scoreboard.updateScores(960,843,629,305)
-    #scoreboard.drawscoreboard()#***How to spawn a arrow left in***
-
-    #arrowrightstuff = pygame.sprite.Group(scoreboard)
 
 
     clock = pygame.time.Clock()
@@ -91,9 +84,6 @@ def main():
                 keepGoing = False
 
 
-        #arrowrightstuff.clear(screen, background)                                #***Screen updaters for left arrows***
-        #arrowrightstuff.update()
-        #arrowrightstuff.draw(screen)
         screen.blit(background, (0,0))
         scoreboard.drawscoreboard(screen)
 

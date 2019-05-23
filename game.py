@@ -10,6 +10,7 @@ from threading import Thread
 from time import sleep
 from scoreboard import Scoreboard
 
+
 class Game:
     def __init__(self, q):
         self.q = q
@@ -17,6 +18,7 @@ class Game:
         pg.init()
         pg.mixer.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        ###self.background = pg.image.load("./images/Stone Brick.png")
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
@@ -29,14 +31,14 @@ class Game:
 
         """self.walls = pg.sprite.Group()"""
         self.player = Player(self)
+        self.player1 = Player1(self)
         self.player2 = Player2(self)
         self.player3 = Player3(self)
-        self.player4 = Player4(self)
         self.all_sprites.add(self.player)
+        self.all_sprites.add(self.player1)
         self.all_sprites.add(self.player2)
         self.all_sprites.add(self.player3)
-        self.all_sprites.add(self.player4)
-        for plat in PLATFORM_LIST:
+        for plat in PLATFORM_LIST1: #Levels just change ListValue
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
@@ -66,6 +68,12 @@ class Game:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
 
+        if self.player1.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.player1, self.platforms, False)
+            if hits:
+                self.player1.pos.y = hits[0].rect.top
+                self.player1.vel.y = 0
+
         if self.player2.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player2, self.platforms, False)
             if hits:
@@ -77,12 +85,6 @@ class Game:
             if hits:
                 self.player3.pos.y = hits[0].rect.top
                 self.player3.vel.y = 0
-
-        if self.player4.vel.y > 0:
-            hits = pg.sprite.spritecollide(self.player4, self.platforms, False)
-            if hits:
-                self.player4.pos.y = hits[0].rect.top
-                self.player4.vel.y = 0
 
     def events(self):
         # Game Loop - events
@@ -96,16 +98,21 @@ class Game:
                 if event.key == pg.K_w:
                     self.player.jump() #put the jump animation herea
                 if event.key == pg.K_t:
-                    self.player2.jump()
+                    self.player1.jump()
                 if event.key == pg.K_i:
-                    self.player3.jump()
+                    self.player2.jump()
                 if event.key == pg.K_UP:
-                    self.player4.jump()
+                    self.player3.jump()
 
     def draw(self):
         # Game Loop - draw
-        self.scoreboard.updateScores(self.player.pos.y, self.player2.pos.y, self.player3.pos.y, self.player4.pos.y)
+        self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
         self.screen.fill(DARKGREY)
+        """self.background.drawbackground(self.screen)
+        width = 900
+        height = 1000
+        #self.image = pg.image.load("./images/Stone Brick.png")
+        #self.image = pg.transform.scale(self.image,(width,height))"""
         self.all_sprites.draw(self.screen)
         self.scoreboard.drawscoreboard(self.screen)
         # *after* drawing everything, flip the display
@@ -167,9 +174,10 @@ def main(q=queue.Queue):
 
 def network(wizard="b", username="bob", q=queue.Queue()):
     s = ClientSend(wizard, username)
-    level = 0
-    while True:
-        s.send(level, q)
+    if s != 0:
+        level = 0
+        while True:
+            s.send(level, q)
 
 q = queue.Queue()
 
