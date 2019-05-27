@@ -6,6 +6,7 @@ import queue
 import pygame as pg
 from settings import *
 from sprites import *
+from spike import *
 from threading import Thread
 from time import sleep
 from scoreboard import Scoreboard
@@ -34,11 +35,15 @@ class Game:
         self.player1 = Player1(self)
         self.player2 = Player2(self)
         self.player3 = Player3(self)
+
         self.all_sprites.add(self.player)
         self.all_sprites.add(self.player1)
         self.all_sprites.add(self.player2)
         self.all_sprites.add(self.player3)
-        for plat in PLATFORM_LIST1: #Levels just change ListValue
+
+
+
+        for plat in PLATFORM_LIST2: #Levels just change ListValue
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
@@ -49,6 +54,7 @@ class Game:
         self.run()
 
 
+
     def run(self):
         # Game Loop
         self.playing = True
@@ -56,7 +62,7 @@ class Game:
             self.clock.tick(FPS)
             self.events()
             self.update()
-            self.draw()
+            self.drawAll()
 
     def update(self):
         # Game Loop - Update
@@ -104,7 +110,7 @@ class Game:
                 if event.key == pg.K_UP:
                     self.player3.jump()
 
-    def draw(self):
+    def drawAll(self):
         # Game Loop - draw
         self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
         self.screen.fill(DARKGREY)
@@ -113,9 +119,27 @@ class Game:
         height = 1000
         #self.image = pg.image.load("./images/Stone Brick.png")
         #self.image = pg.transform.scale(self.image,(width,height))"""
+        spikeHitboxes = pg.sprite.Group()                                  #SPIKES FOR LEVEL 3 ONLY!!
+        drawSpike = pg.sprite.Group()
+        lespike = Spike(spikeHitboxes, drawSpike, 535,200)
+        mespike = Spike(spikeHitboxes, drawSpike, 615,200)
+        #kespike = Spike(spikeHitboxes, drawSpike, 675,200)
+
+
+
         self.all_sprites.draw(self.screen)
         self.scoreboard.drawscoreboard(self.screen)
         # *after* drawing everything, flip the display
+        #spikeHitboxes.clear(self.screen, background)                          #***Updaters needed for spikes***
+
+        spikeHitboxes.update()
+        drawSpike.update()
+
+        spikeHitboxes.draw(self.screen)
+        drawSpike.draw(self.screen)
+
+
+
         pg.display.flip()
         #send = 0
         #send += 1

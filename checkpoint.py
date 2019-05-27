@@ -32,9 +32,9 @@ def main():
     background.fill((255, 255, 255))
     screen.blit(background, (0,0))
 
-    flagGroup = pygame.sprite.Group()                                   #***How to spawn a arrow left in***
-    flag1 = Checkpoint(flagGroup, 275, 200)
-    flagstuff = pygame.sprite.Group(flag1)
+                                   #***How to spawn a arrow left in***
+    flag1 = Checkpoint(275, 200)
+    flagGroup = pygame.sprite.Group(flag1)
 
 
     clock = pygame.time.Clock()
@@ -48,10 +48,8 @@ def main():
 
 
 
-        flagstuff.clear(screen, background)                                #***Screen updaters for left arrows***
-        flagstuff.update()
+        flagGroup.update()
         flagGroup.draw(screen)
-        flagstuff.draw(screen)
 
 
 
