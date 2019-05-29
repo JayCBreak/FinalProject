@@ -51,9 +51,17 @@ class Game:
             wa = Wall(*wall)
             self.all_sprites.add(wa)
             self.walls.add(wa)"""
+
+
+        self.spikeHitboxes = pg.sprite.Group()                                  #SPIKES FOR LEVEL 3 ONLY!!
+        self.drawSpike = pg.sprite.Group()
+
+        for spike_coordinate in SPIKE_LIST2: #Spikes just change ListValue
+            (x,y) = spike_coordinate
+            lespike = Spike(self.spikeHitboxes, self.drawSpike, x,y)
+
+
         self.run()
-
-
 
     def run(self):
         # Game Loop
@@ -119,24 +127,18 @@ class Game:
         height = 1000
         #self.image = pg.image.load("./images/Stone Brick.png")
         #self.image = pg.transform.scale(self.image,(width,height))"""
-        spikeHitboxes = pg.sprite.Group()                                  #SPIKES FOR LEVEL 3 ONLY!!
-        drawSpike = pg.sprite.Group()
-        lespike = Spike(spikeHitboxes, drawSpike, 535,200)
-        mespike = Spike(spikeHitboxes, drawSpike, 615,200)
-        #kespike = Spike(spikeHitboxes, drawSpike, 675,200)
+
 
 
 
         self.all_sprites.draw(self.screen)
         self.scoreboard.drawscoreboard(self.screen)
-        # *after* drawing everything, flip the display
-        #spikeHitboxes.clear(self.screen, background)                          #***Updaters needed for spikes***
 
-        spikeHitboxes.update()
-        drawSpike.update()
+        self.spikeHitboxes.update()
+        self.drawSpike.update()
 
-        spikeHitboxes.draw(self.screen)
-        drawSpike.draw(self.screen)
+        self.spikeHitboxes.draw(self.screen)
+        self.drawSpike.draw(self.screen)
 
 
 

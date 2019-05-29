@@ -10,6 +10,9 @@ PLAYER_FRICTION = -0.10
 PLAYER_GRAV = 0.8
 
 # Starting platforms (x,y,blockx,blocky)
+
+
+SPIKE_LIST = []
 PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform (was 100,20)
                  (175, HEIGHT - 400, 75, 75), #second platform
@@ -20,6 +23,9 @@ PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (175, 100, 75, 75), #seventh
                  (0,100,75,75)] #eighth
 
+SPIKE_LIST1 = [(0,960),
+              (75,960),
+              (150,960)]
 PLATFORM_LIST1 = [(350, HEIGHT - 40, 500, 40), #base floor SHOULD BE 150
                  (600, 750, 75, 75), #first platform
                  (800, 500, 75, 75), #second platform
@@ -32,24 +38,28 @@ PLATFORM_LIST1 = [(350, HEIGHT - 40, 500, 40), #base floor SHOULD BE 150
                   (325,100,75,75), #nine
                   (750,75,75,75)] #final
 
+SPIKE_LIST2 = [(525,200),
+              (600,200)]
 PLATFORM_LIST2 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (450, 750, 75, 75), #first platform
                  (175, 600, 75, 75), #second platform
                  (0,475,75,75), #third
                  (175,300,75,75), #fourth
                  (450,200,75,75), #fifth
-                 (700, 200, 75,75), #sixth
+                 (675, 200, 75,75), #sixth
                  (825, 100, 75, 75), #seventh
                  (0, 100, 75, 75)] #eighth
 
+SPIKE_LIST3 = [(535,200),
+              (615,200)]
 PLATFORM_LIST3 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
-                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75), #first platform
-                 (125, HEIGHT - 400, 75, 75), #second platform
-                 (0,500,75,75), #third
-                 (825,500,75,75), #fourth
-                 (650,300,75,75), #fifth
-                 (350, 200, 75,75), #sixth
-                 (175, 100, 75, 75)] #seventh
+                 (350,750, 35, 35), #first platform
+                 (125, HEIGHT - 400, 35, 35), #second platform
+                 (0,500,35,35), #third
+                 (795,500,35,35), #fourth
+                 (630,300,35,35), #fifth
+                 (350, 200, 35,35), #sixth
+                 (175, 100, 35, 35)] #seventh
 
 
 
