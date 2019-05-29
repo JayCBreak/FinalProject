@@ -1,5 +1,12 @@
 """Game Development with Pygame
 Wizard Tower Main Game code
+
+by:
+Trey Cowell
+Will Smith
+Brandon Wabnitz
+Jacob Chotenovsky
+
 """
 import socket
 import queue
@@ -43,10 +50,11 @@ class Game:
 
 
 
-        for plat in PLATFORM_LIST2: #Levels just change ListValue
+        for plat in PLATFORM_LIST3: #Levels just change ListValue
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
+
         """for wall in WALL_LIST:
             wa = Wall(*wall)
             self.all_sprites.add(wa)
@@ -71,6 +79,9 @@ class Game:
             self.events()
             self.update()
             self.drawAll()
+                            #print ("All sprites", self.all_sprites)    TESTING TO SEE HOW MANY
+                            #print ("hit spickess", self.spikeHitboxes) SPIKES HAVE BEEN DRAWN
+                            #print ("spikes", self.drawSpike)
 
     def update(self):
         # Game Loop - Update
@@ -110,7 +121,7 @@ class Game:
                 self.running = False
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_w:
-                    self.player.jump() #put the jump animation herea
+                    self.player.jump() #put the jump animation here
                 if event.key == pg.K_t:
                     self.player1.jump()
                 if event.key == pg.K_i:
@@ -143,12 +154,12 @@ class Game:
 
 
         pg.display.flip()
-        #send = 0
-        #send += 1
-        #if send % 10 == 0:
-        q.queue.clear()
-        q.put(self.player.pos.x)
-        q.put(self.player.pos.y)
+        send = 0
+        send += 1
+        if send % 10 == 0:
+            q.queue.clear()
+            q.put(self.player.pos.x)
+            q.put(self.player.pos.y)
 
 
     def show_start_screen(self):
@@ -167,7 +178,7 @@ class ClientSend:
         self.x = -20
         self.y = -20
         self.level = 0
-        host = '174.93.72.251'
+        host = 'gamertime.ddns.net'
         port = 8888
         self.mySocket = socket.socket()
         try:

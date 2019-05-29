@@ -42,9 +42,11 @@ class Spike(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = self.xcord
         self.rect.y = self.ycord
+        self.hitbox()
 
     def update(self):
-        self.hitbox()
+        pass
+        #self.hitbox()
 
     def hitbox(self):
         self.hitbox1 = Hitbox(self.rect.x + 23, self.rect.y + 28, 26, 30)
