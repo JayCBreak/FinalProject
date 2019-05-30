@@ -26,11 +26,17 @@ class Game:
         pg.init()
         pg.mixer.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
-        ###self.background = pg.image.load("./images/Stone Brick.png")
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
         self.scoreboard = Scoreboard()
+
+
+
+        self.image = pg.image.load("./images/Stonewall.jpg")
+        self.image = pg.transform.scale(self.image,(900,1000))
+        self.screen.blit(self.image,(0,0))
+
 
     def new(self):
         # start a new game
@@ -50,7 +56,7 @@ class Game:
 
 
 
-        for plat in PLATFORM_LIST3: #Levels just change ListValue
+        for plat in PLATFORM_LIST: #Levels just change ListValue
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
@@ -64,7 +70,7 @@ class Game:
         self.spikeHitboxes = pg.sprite.Group()                                  #SPIKES FOR LEVEL 3 ONLY!!
         self.drawSpike = pg.sprite.Group()
 
-        for spike_coordinate in SPIKE_LIST2: #Spikes just change ListValue
+        for spike_coordinate in SPIKE_LIST: #Spikes just change ListValue
             (x,y) = spike_coordinate
             lespike = Spike(self.spikeHitboxes, self.drawSpike, x,y)
 
@@ -131,18 +137,20 @@ class Game:
 
     def drawAll(self):
         # Game Loop - draw
+
+
+
+
+
         self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
-        self.screen.fill(DARKGREY)
-        """self.background.drawbackground(self.screen)
-        width = 900
-        height = 1000
-        #self.image = pg.image.load("./images/Stone Brick.png")
-        #self.image = pg.transform.scale(self.image,(width,height))"""
+
+        #self.screen.fill(LIGHTGREY)
 
 
-
-
+        self.all_sprites.clear(self.screen,self.image)
         self.all_sprites.draw(self.screen)
+
+        #######self.scoreboard.clear(self.screen)
         self.scoreboard.drawscoreboard(self.screen)
 
         self.spikeHitboxes.update()
@@ -154,12 +162,9 @@ class Game:
 
 
         pg.display.flip()
-        send = 0
-        send += 1
-        if send % 10 == 0:
-            q.queue.clear()
-            q.put(self.player.pos.x)
-            q.put(self.player.pos.y)
+        q.queue.clear()
+        q.put(self.player.pos.x)
+        q.put(self.player.pos.y)
 
 
     def show_start_screen(self):
@@ -186,9 +191,10 @@ class ClientSend:
             print("Connection Successful at: "+str(host)+":"+str(port))
         except:
             print("Unable to connect to server at: "+str(host)+":"+str(port))
+            global s
+            s = 0
 
     def send(self, level=0, q=queue.Queue()):
-        sleep(0.05)
         self.x = q.get()
         self.y = q.get()
         self.level = level
@@ -211,10 +217,9 @@ def main(q=queue.Queue):
 
 def network(wizard="b", username="bob", q=queue.Queue()):
     s = ClientSend(wizard, username)
-    if s != 0:
-        level = 0
-        while True:
-            s.send(level, q)
+    level = 0
+    while True:
+        s.send(level, q)
 
 q = queue.Queue()
 

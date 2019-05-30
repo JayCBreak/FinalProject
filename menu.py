@@ -115,7 +115,7 @@ def game(play = "play"):
         if username is None:
             username = "player"
         else:
-            username = username
+            username = username[:12]
         print("Thank you for setting your username to "+username+"!")
     elif play == "character":
         print("This would change the players character model.")

@@ -1,3 +1,7 @@
 from sprites import *
 
-class drawAllWizard
+class drawAllWizard:
+
+    def __init__(self):
+
+        def sendIt(self):
