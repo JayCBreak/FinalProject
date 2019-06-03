@@ -1,29 +1,26 @@
-"""
-Barrel...
-"""
 import pygame
 pygame.init()
 
-
 class Barrel(pygame.sprite.Sprite):
-    def __init__(self, group, x = 0 , y = 0):
+
+    def __init__(self, x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
-        self.group = group
+
         width = 75
         height = 75
 
         self.xcord = x
         self.ycord = y
 
-        self.image = pygame.image.load("./images/baRRel.png").convert_alpha()
+        self.image = pygame.image.load("./images/baRRelsmol.png").convert_alpha()
         self.image = pygame.transform.scale(self.image,(width,height))
 
         self.rect = self.image.get_rect()
         self.rect.x = self.xcord
         self.rect.y = self.ycord
 
-
-
+    def update(self):
+        pass
 
 def main():
     screen = pygame.display.set_mode((900, 1000))
@@ -35,13 +32,10 @@ def main():
     background.fill((255, 255, 255))
     screen.blit(background, (0,0))
 
-    #spikeHitboxes = pygame.sprite.Group()                                  #***Groups needed in main***
-    drawbarrel = pygame.sprite.Group()
-
-    lebarrel = Barrel(drawbarrel, 200,200)                     #***Code to summon spikes***
-
-
-
+    flag2 = Barrel(200, 200)
+    flag1 = Barrel(275, 200)
+    flag3 = Barrel(350,200)
+    flagGroup = pygame.sprite.Group(flag1,flag2,flag3)
 
 
     clock = pygame.time.Clock()
@@ -55,16 +49,14 @@ def main():
 
 
 
-        drawbarrel.update()
-        drawbarrel.draw(screen)
+        flagGroup.update()
+        flagGroup.draw(screen)
+
 
 
         pygame.display.flip()
 
 
 
-
-
 if __name__ == "__main__":
     main()
-

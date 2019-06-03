@@ -11,7 +11,7 @@ class ClientSend:
 
 
 def main():
-    host = '174.93.72.251'
+    host = 'gamertime.ddns.net'
     port = 8888
 
     mySocket = socket.socket()

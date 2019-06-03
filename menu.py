@@ -58,6 +58,7 @@ class Button(pygame.sprite.Sprite):
 
 
 def main():
+    global username, charModel
     pygame.init()
     pygame.mixer.init()
     screen = pygame.display.set_mode((screenWidth, screenHeight))
@@ -105,6 +106,7 @@ def main():
 
 
 def game(play = "play"):
+    global username, charModel
     if play == "play":
         subprocess.Popen("python game.py")
     elif play == "tutorial":

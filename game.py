@@ -42,6 +42,7 @@ class Game:
         # start a new game
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
+        self.scoreGroup = pg.sprite.Group()
 
         """self.walls = pg.sprite.Group()"""
         self.player = Player(self)
@@ -138,23 +139,24 @@ class Game:
     def drawAll(self):
         # Game Loop - draw
 
-
-
-
-
         self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
-
-        #self.screen.fill(LIGHTGREY)
 
 
         self.all_sprites.clear(self.screen,self.image)
         self.all_sprites.draw(self.screen)
 
-        #######self.scoreboard.clear(self.screen)
-        self.scoreboard.drawscoreboard(self.screen)
+        # self.scoreboard..clear(self.screen)
+        self.scoreboard.drawscoreboard(self.screen, self.image)
 
+
+
+       #print ("The size of self.scorres is ", self.scoreGroup)
         self.spikeHitboxes.update()
         self.drawSpike.update()
+        self.scoreboard.update()
+
+
+
 
         self.spikeHitboxes.draw(self.screen)
         self.drawSpike.draw(self.screen)
@@ -165,6 +167,14 @@ class Game:
         q.queue.clear()
         q.put(self.player.pos.x)
         q.put(self.player.pos.y)
+
+        """global dq
+        data = dq.get()
+        username = data[1]
+        wizardColour = data[2]
+        xCoords = data[3]
+        yCoords = data[4]
+        level = data[5]"""
 
 
     def show_start_screen(self):
@@ -203,6 +213,10 @@ class ClientSend:
         self.mySocket.send(message.encode())
         data = self.mySocket.recv(1024).decode()
         print('Received from server: ' + data)
+        data = data[1:-1]
+        global dq
+        dq = queue.Queue()
+        dq.put(data)
 
 
 def main(q=queue.Queue):
@@ -224,5 +238,7 @@ def network(wizard="b", username="bob", q=queue.Queue()):
 q = queue.Queue()
 
 Thread(target=network, args=("Wizard", "Username", q)).start()
-
-main(q)
+try:
+    main(q)
+except:
+    print ("bad")
