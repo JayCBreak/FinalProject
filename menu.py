@@ -20,7 +20,7 @@ imgBtnTutorial = "./images/tutorial.png"
 imgBtnNameSet = "./images/setName.png"
 imgBtnExit = "./images/exit.png"
 imgdoor = "./images/dooR.png"
-
+username = None
 
 
  
@@ -108,6 +108,14 @@ def main():
 def game(play = "play"):
     global username, charModel
     if play == "play":
+        if username is None:
+            username = "player"
+            player1pos = "0"
+            playerlist = open ("playerlist", "a")
+            playerlist.write(username + ";" + player1pos + "\n")
+            playerlist.close()
+        else:
+            pass
         subprocess.Popen("python game.py")
     elif play == "tutorial":
         print("This would play a video which would show the tutorial of how to play and how to move.")
@@ -119,11 +127,19 @@ def game(play = "play"):
         else:
             username = username[:12]
         print("Thank you for setting your username to "+username+"!")
+        player1pos = "0"
+        playerlist = open ("playerlist", "a")
+        playerlist.write(username + ";" + player1pos + "\n")
+        playerlist.close()
     elif play == "character":
         print("This would change the players character model.")
         charModel = easygui.buttonbox("Please choose your favorite wizard!", "Choose Your Character!", ["Pink", "White", "Green", "Purple"], image="./images/wizardSelect.png")
 
 
+
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!\n\n\n\n\n\n\n\n")
 main()
 print("\n\nThank you for playing EpicGamer Co.'s Wizard Tower!\n\n")
+playerlist = open ("playerlist", "a")
+playerlist.close()
+

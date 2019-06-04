@@ -144,7 +144,7 @@ class Player2(pg.sprite.Sprite): #White Wizard
 
 
 
-class Player3(pg.sprite.Sprite): #Purple Wizard
+class Player3(pg.sprite.Sprite): #Purple/Blue Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game

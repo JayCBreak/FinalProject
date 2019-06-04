@@ -57,7 +57,7 @@ class Game:
 
 
 
-        for plat in PLATFORM_LIST: #Levels just change ListValue
+        for plat in PLATFORM_LIST2: #Levels just change ListValue
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
@@ -71,7 +71,7 @@ class Game:
         self.spikeHitboxes = pg.sprite.Group()                                  #SPIKES FOR LEVEL 3 ONLY!!
         self.drawSpike = pg.sprite.Group()
 
-        for spike_coordinate in SPIKE_LIST: #Spikes just change ListValue
+        for spike_coordinate in SPIKE_LIST2: #Spikes just change ListValue
             (x,y) = spike_coordinate
             lespike = Spike(self.spikeHitboxes, self.drawSpike, x,y)
 
@@ -139,28 +139,19 @@ class Game:
     def drawAll(self):
         # Game Loop - draw
 
-        self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
 
+        self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
+        self.scoreboard.drawscoreboard(self.screen, self.image)
 
         self.all_sprites.clear(self.screen,self.image)
         self.all_sprites.draw(self.screen)
-
-        # self.scoreboard..clear(self.screen)
-        self.scoreboard.drawscoreboard(self.screen, self.image)
-
-
-
-       #print ("The size of self.scorres is ", self.scoreGroup)
         self.spikeHitboxes.update()
         self.drawSpike.update()
-        self.scoreboard.update()
-
-
-
 
         self.spikeHitboxes.draw(self.screen)
         self.drawSpike.draw(self.screen)
 
+        self.scoreboard.update()
 
 
         pg.display.flip()
@@ -208,12 +199,13 @@ class ClientSend:
         self.x = q.get()
         self.y = q.get()
         self.level = level
-        message = str([self.n, self.w,  self.x, self.y, self.level])
+        message = str(self.n+";"+self.w+";"+self.x+";"+self.y+";"+self.level)
         print("Sending message: "+message)
         self.mySocket.send(message.encode())
         data = self.mySocket.recv(1024).decode()
         print('Received from server: ' + data)
         data = data[1:-1]
+        data = data.split(";")
         global dq
         dq = queue.Queue()
         dq.put(data)
