@@ -140,6 +140,4 @@ def game(play = "play"):
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to the Wizard Tower!\n\n\n\n\n\n\n\n")
 main()
 print("\n\nThank you for playing EpicGamer Co.'s Wizard Tower!\n\n")
-playerlist = open ("playerlist", "a")
-playerlist.close()
 

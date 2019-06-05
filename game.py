@@ -18,6 +18,7 @@ from threading import Thread
 from time import sleep
 from scoreboard import Scoreboard
 
+playerList = []
 
 class Game:
     def __init__(self, q):
@@ -123,6 +124,18 @@ class Game:
         for event in pg.event.get():
             # check for closing window
             if event.type == pg.QUIT:
+                playerlist = open("playerlist", "r")
+                line = " "
+                while line != "":
+                    line = playerlist.readline()
+                    if line != "":
+                        lineList = line.split(";")
+                        pname = lineList[0]
+                        ppos = lineList[1]
+                        playerList.append([pname, ppos])
+                        print(playerList)
+                playerlist.close()
+                print(playerList)
                 if self.playing:
                     self.playing = False
                 self.running = False
@@ -199,16 +212,25 @@ class ClientSend:
         self.x = q.get()
         self.y = q.get()
         self.level = level
-        message = str(self.n+";"+self.w+";"+self.x+";"+self.y+";"+self.level)
+        message = (str(self.n)+";"+str(self.w)+";"+str(self.x)+";"+str(self.y)+";"+str(self.level))
         print("Sending message: "+message)
-        self.mySocket.send(message.encode())
-        data = self.mySocket.recv(1024).decode()
-        print('Received from server: ' + data)
-        data = data[1:-1]
-        data = data.split(";")
-        global dq
-        dq = queue.Queue()
-        dq.put(data)
+        try:
+            self.mySocket.send(message.encode())
+        except:
+            print("Unable to send data to the Server.")
+            exit()
+
+        try:
+            data = self.mySocket.recv(1024).decode()
+            print('Received from server: ' + data)
+            data = data[1:-1]
+            data = data.split(";")
+            global dq
+            dq = queue.Queue()
+            dq.put(data)
+        except:
+            print("Unable to receive data from the Server.")
+            exit()
 
 
 def main(q=queue.Queue):
@@ -230,6 +252,7 @@ def network(wizard="b", username="bob", q=queue.Queue()):
 q = queue.Queue()
 
 Thread(target=network, args=("Wizard", "Username", q)).start()
+
 try:
     main(q)
 except:
