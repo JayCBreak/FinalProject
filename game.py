@@ -120,6 +120,7 @@ class Game:
                 self.player3.vel.y = 0
 
     def events(self):
+        global username
         # Game Loop - events
         for event in pg.event.get():
             # check for closing window
@@ -128,14 +129,24 @@ class Game:
                 line = " "
                 while line != "":
                     line = playerlist.readline()
+                    #print (line)
                     if line != "":
                         lineList = line.split(";")
                         pname = lineList[0]
+                        #print(pname)
+                        #print ("The length is of the list", len(lineList))
+                        #lineList[1].strip(['\n'])
                         ppos = lineList[1]
+                        ppos.strip("\n")
                         playerList.append([pname, ppos])
-                        print(playerList)
+                        #print(playerList)
                 playerlist.close()
-                print(playerList)
+                playerlist = open("playerlist", "w")
+                for player in playerList:
+                    [pname, ppos] = player
+                    if pname != username:
+                        humanprofiles.write(pname + " ; " + ppos + " \n")
+                playerlist.close()
                 if self.playing:
                     self.playing = False
                 self.running = False
@@ -213,7 +224,7 @@ class ClientSend:
         self.y = q.get()
         self.level = level
         message = (str(self.n)+";"+str(self.w)+";"+str(self.x)+";"+str(self.y)+";"+str(self.level))
-        print("Sending message: "+message)
+        #print("Sending message: "+message)
         try:
             self.mySocket.send(message.encode())
         except:
@@ -222,8 +233,8 @@ class ClientSend:
 
         try:
             data = self.mySocket.recv(1024).decode()
-            print('Received from server: ' + data)
-            data = data[1:-1]
+            #print('Received from server: ' + data)
+            data = data[2:-1]
             data = data.split(";")
             global dq
             dq = queue.Queue()
@@ -231,6 +242,7 @@ class ClientSend:
         except:
             print("Unable to receive data from the Server.")
             exit()
+
 
 
 def main(q=queue.Queue):
@@ -253,7 +265,11 @@ q = queue.Queue()
 
 Thread(target=network, args=("Wizard", "Username", q)).start()
 
+
+main(q)
+
+"""
 try:
     main(q)
 except:
-    print ("bad")
+    print ("bad")"""

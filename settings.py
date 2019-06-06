@@ -27,7 +27,9 @@ SPIKE_LIST1 = [(0,960),
               (75,960),
               (150,960),
               (225,960),
-              (300,960),]
+              (300,960),
+              (750,960),
+              (825,960)]
 PLATFORM_LIST1 = [(350, HEIGHT - 40, 500, 40), #base floor SHOULD BE 150
                  (600, 750, 75, 75), #first platform
                  (800, 500, 75, 75), #second platform
