@@ -191,6 +191,19 @@ class Player3(pg.sprite.Sprite): #Purple/Blue Wizard
         self.rect.midbottom = self.pos
 
 
+class networkWiz(pg.sprite.Sprite):
+    def __init__(self):
+        print("god oh no")
+
+    def draw(self, wizCol, xCoord, yCoord):
+        wizimg = pg.image.load("./images/"+wizCol+"/Run/tile005.png")
+    #def update(self):
+
+
+
+
+
+
 
 
 class Platform(pg.sprite.Sprite):

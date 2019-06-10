@@ -28,6 +28,7 @@ class Label(pygame.sprite.Sprite):
 class Scoreboard():
 
     def __init__(self):
+        global username
         self.player1scorefull = 0
         self.player2scorefull = 0
         self.player3scorefull = 0
@@ -37,6 +38,14 @@ class Scoreboard():
         self.group = pygame.sprite.Group()
         self.start = True
         self.createscoreboard()
+        playerlist = open("playerlist", "r")
+        line = " "
+        while line != "":
+            line = playerlist.readline()
+            if line != "":
+                lineList = line.split(";")
+                username = lineList[0]
+        playerlist.close()
 
 
 
@@ -52,6 +61,7 @@ class Scoreboard():
             item.update()"""
 
     def score(self, player1pos, player2pos, player3pos, player4pos):
+        global username
         self.player1scorefull = 0
         self.player2scorefull = 0
         self.player3scorefull = 0
@@ -68,7 +78,7 @@ class Scoreboard():
         self.player4scorefull += player4score
         #print (self.player1scorefull)
 
-        self.textList = ["Player1: %d"% self.player1scorefull,
+        self.textList = [username + ": %d"% self.player1scorefull,
                      "Player2: %d"% self.player2scorefull,
                      "Player3: %d"% self.player3scorefull,
                      "Player4: %d"% self.player4scorefull]

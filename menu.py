@@ -23,6 +23,7 @@ imgdoor = "./images/dooR.png"
 username = None
 
 
+
  
 
 
@@ -110,9 +111,8 @@ def game(play = "play"):
     if play == "play":
         if username is None:
             username = "player"
-            player1pos = "0"
-            playerlist = open ("playerlist", "a")
-            playerlist.write(username + ";" + player1pos + "\n")
+            playerlist = open ("playerlist", "w")
+            playerlist.write(username + "\n")
             playerlist.close()
         else:
             pass
@@ -121,15 +121,16 @@ def game(play = "play"):
         print("This would play a video which would show the tutorial of how to play and how to move.")
         subprocess.Popen("python tutorial.py")
     elif play == "nameSet":
+
         username = easygui.enterbox("Please Enter your preferred Username.", "Set Your Username")
         if username is None:
             username = "player"
         else:
             username = username[:12]
         print("Thank you for setting your username to "+username+"!")
-        player1pos = "0"
-        playerlist = open ("playerlist", "a")
-        playerlist.write(username + ";" + player1pos + "\n")
+
+        playerlist = open ("playerlist", "w")
+        playerlist.write(username + "\n")
         playerlist.close()
     elif play == "character":
         print("This would change the players character model.")

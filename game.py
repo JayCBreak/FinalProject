@@ -15,7 +15,6 @@ from settings import *
 from sprites import *
 from spike import *
 from threading import Thread
-from time import sleep
 from scoreboard import Scoreboard
 
 playerList = []
@@ -50,11 +49,13 @@ class Game:
         self.player1 = Player1(self)
         self.player2 = Player2(self)
         self.player3 = Player3(self)
+        self.netWiz = networkWiz(self)
 
         self.all_sprites.add(self.player)
         self.all_sprites.add(self.player1)
         self.all_sprites.add(self.player2)
         self.all_sprites.add(self.player3)
+        self.all_sprites.add(self.netWiz)
 
 
 
@@ -125,6 +126,7 @@ class Game:
         for event in pg.event.get():
             # check for closing window
             if event.type == pg.QUIT:
+                """
                 playerlist = open("playerlist", "r")
                 line = " "
                 while line != "":
@@ -147,6 +149,7 @@ class Game:
                     if pname != username:
                         humanprofiles.write(pname + " ; " + ppos + " \n")
                 playerlist.close()
+                """
                 if self.playing:
                     self.playing = False
                 self.running = False
@@ -162,6 +165,15 @@ class Game:
 
     def drawAll(self):
         # Game Loop - draw
+
+        global dq
+        data = dq.get()
+        username = data[1]
+        wizardColour = data[2]
+        xCoords = data[3]
+        yCoords = data[4]
+        level = data[5]
+        self.netWiz.draw(wizardColour, xCoords, yCoords)
 
 
         self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
@@ -182,14 +194,6 @@ class Game:
         q.queue.clear()
         q.put(self.player.pos.x)
         q.put(self.player.pos.y)
-
-        """global dq
-        data = dq.get()
-        username = data[1]
-        wizardColour = data[2]
-        xCoords = data[3]
-        yCoords = data[4]
-        level = data[5]"""
 
 
     def show_start_screen(self):
