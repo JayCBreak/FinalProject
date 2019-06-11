@@ -1,7 +1,14 @@
+"""
+Checkpoint code:
+When player touches the checkpoint
+they will proceed to the next level
+and respawn there.
+"""
+
 import pygame
 pygame.init()
 
-class Checkpoint(pygame.sprite.Sprite):
+class Checkpoint(pygame.sprite.Sprite): #Simple checkpoint to move player to next level
 
     def __init__(self, x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
@@ -22,6 +29,8 @@ class Checkpoint(pygame.sprite.Sprite):
     def update(self):
         pass
 
+
+#Testing code
 def main():
     screen = pygame.display.set_mode((900, 1000))
 

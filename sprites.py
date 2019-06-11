@@ -1,4 +1,8 @@
 # Sprite classes for platform game
+"""Seperate to keep game.py as organized as possible
+This file contains all of the wizards, their movement,
+and """
+
 import pygame as pg
 from settings import *
 vec = pg.math.Vector2
@@ -9,10 +13,11 @@ class Player(pg.sprite.Sprite): #Pink Wizard
         self.game = game
         self.image = pg.Surface((30, 30))
         self.image.fill(PINK)
-        self.image = pg.image.load("./images/p/Idle/tile000.png")
+        self.wizCol = open("wizCol","r").read()
+        self.image = pg.image.load("./images/"+self.wizCol+"/Idle/tile000.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.pos = vec(WIDTH / 6, HEIGHT / 1)
+        self.pos = vec(WIDTH / 2, HEIGHT / 1) #spawns
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
@@ -29,10 +34,10 @@ class Player(pg.sprite.Sprite): #Pink Wizard
         keys = pg.key.get_pressed()
         if keys[pg.K_a]:
             self.acc.x = -PLAYER_ACC
-            self.image = pg.image.load("./images/p/Run/tile005LEFT.png")
+            self.image = pg.image.load("./images/"+self.wizCol+"/Run/tile005LEFT.png")
         if keys[pg.K_d]:
             self.acc.x = PLAYER_ACC
-            self.image = pg.image.load("./images/p/Run/tile005.png")
+            self.image = pg.image.load("./images/"+self.wizCol+"/Run/tile005.png")
 
 
         # apply friction
@@ -51,7 +56,7 @@ class Player(pg.sprite.Sprite): #Pink Wizard
 
 
 
-class Player1(pg.sprite.Sprite): #Green Wizard
+"""class Player1(pg.sprite.Sprite): #Green Wizard
     def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
         self.game = game
@@ -188,10 +193,10 @@ class Player3(pg.sprite.Sprite): #Purple/Blue Wizard
         if self.pos.x < 0:
             self.pos.x = WIDTH
 
-        self.rect.midbottom = self.pos
+        self.rect.midbottom = self.pos """
 
 
-class networkWiz(pg.sprite.Sprite):
+"""class networkWiz(pg.sprite.Sprite):
     def __init__(self):
         print("god oh no")
 
@@ -199,6 +204,7 @@ class networkWiz(pg.sprite.Sprite):
         wizimg = pg.image.load("./images/"+wizCol+"/Run/tile005.png")
     #def update(self):
 
+    #def clear(self):"""
 
 
 

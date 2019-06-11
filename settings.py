@@ -1,4 +1,8 @@
 # game options/settings
+"""This py file houses all of the levels in its own seperate file to
+try to keep the game.py code as organized as possible
+This code contains gravity and the dimensions for the screen"""
+
 TITLE = "Wizard Tower!"
 WIDTH = 900
 HEIGHT = 1000
@@ -66,16 +70,7 @@ PLATFORM_LIST3 = [(0, HEIGHT - 40, WIDTH, 40), #base floor
                  (175, 100, 35, 35)] #seventh
 
 
-
-
-
-
-"""WALL_LIST = [(10, HEIGHT -100, WIDTH, 40),
-             (WIDTH / 2 - 50, HEIGHT * 3 / 4, 75, 75),
-             (125, HEIGHT - 400, 75, 75)]"""
-
-
-# define colors
+# define colors so we don't have to type all the numbers each time while testing basic block colours
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)

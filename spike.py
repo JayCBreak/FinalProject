@@ -9,7 +9,7 @@ pygame.init()
 
 
 
-class Hitbox(pygame.sprite.Sprite):
+class Hitbox(pygame.sprite.Sprite):  #Special hitbox for spike so its not a simple square
     def __init__(self, x = 0 , y = 0, wid = 100, hei = 100):
         pygame.sprite.Sprite.__init__(self)
         self.width = wid
@@ -24,7 +24,7 @@ class Hitbox(pygame.sprite.Sprite):
         self.rect.x = self.xcord
         self.rect.y = self.ycord
 
-class Spike(pygame.sprite.Sprite):
+class Spike(pygame.sprite.Sprite):  #Simple image that will be displayed over the hitboxes
     def __init__(self, group, groupDraw, x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
         self.group = group
@@ -48,7 +48,7 @@ class Spike(pygame.sprite.Sprite):
         pass
         #self.hitbox()
 
-    def hitbox(self):
+    def hitbox(self):  #Hitbox locations
         self.hitbox1 = Hitbox(self.rect.x + 23, self.rect.y + 28, 26, 30)
         self.hitbox2 = Hitbox(self.rect.x + 10, self.rect.y + 58, 57, 17)
         self.hitbox3 = Hitbox(self.rect.x + 31, self.rect.y + 15, 10, 20)
@@ -59,7 +59,7 @@ class Spike(pygame.sprite.Sprite):
 
 
 
-
+#Code testing Area
 def main():
     screen = pygame.display.set_mode((900, 1000))
 

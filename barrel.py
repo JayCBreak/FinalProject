@@ -1,7 +1,14 @@
+"""
+Barrel code:
+Simple fun code for pure
+ascetics and visual design
+to fill in any dead area.
+"""
+
 import pygame
 pygame.init()
 
-class Barrel(pygame.sprite.Sprite):
+class Barrel(pygame.sprite.Sprite): #Fun code to place a barrel that doesn't have a hitbox
 
     def __init__(self, x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
@@ -22,6 +29,7 @@ class Barrel(pygame.sprite.Sprite):
     def update(self):
         pass
 
+#Code tester
 def main():
     screen = pygame.display.set_mode((900, 1000))
 

@@ -1,7 +1,14 @@
+"""
+Arrow code:
+When player touches an arrow they
+will respawn at last checkpoint.
+Arrows will be moving across the screen.
+"""
+
 import pygame
 pygame.init()
 
-class ArrowBlockRight(pygame.sprite.Sprite):
+class ArrowBlockRight(pygame.sprite.Sprite): #Code that creates the block which the arrow starts from
 
     def __init__(self, x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
@@ -21,7 +28,7 @@ class ArrowBlockRight(pygame.sprite.Sprite):
 
     def update(self):
         pass
-class ArrowRight(pygame.sprite.Sprite):
+class ArrowRight(pygame.sprite.Sprite): #Code for the moving arrow
 
     def __init__(self,arrowBlockRightGroup , x = 0 , y = 0):
         pygame.sprite.Sprite.__init__(self)
@@ -42,7 +49,7 @@ class ArrowRight(pygame.sprite.Sprite):
         self.rect.x = self.xcord +70
         self.rect.centery = self.ycord
 
-    def update(self):
+    def update(self): #Moving code for arrow
         self.rect.centerx += 7
         if self.rect.x >= 900:
             self.rect.x = self.xcord +70
@@ -51,7 +58,7 @@ class ArrowRight(pygame.sprite.Sprite):
 
 
 
-
+#Testing Area for code
 def main():
     screen = pygame.display.set_mode((900, 1000))
 

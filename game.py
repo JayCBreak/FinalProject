@@ -19,6 +19,7 @@ from scoreboard import Scoreboard
 
 playerList = []
 
+
 class Game:
     def __init__(self, q):
         self.q = q
@@ -40,40 +41,34 @@ class Game:
 
     def new(self):
         # start a new game
-        self.all_sprites = pg.sprite.Group()
+        self.all_sprites = pg.sprite.Group()    #creating a group for the wizards/ sprites/ and scoreboard
         self.platforms = pg.sprite.Group()
         self.scoreGroup = pg.sprite.Group()
 
-        """self.walls = pg.sprite.Group()"""
         self.player = Player(self)
-        self.player1 = Player1(self)
-        self.player2 = Player2(self)
-        self.player3 = Player3(self)
-        self.netWiz = networkWiz(self)
+        #self.player1 = Player1(self)
+        #self.player2 = Player2(self)        #getting the specific wizards from sprites.py
+        #self.player3 = Player3(self)
+        #self.netWiz = networkWiz(self)
 
         self.all_sprites.add(self.player)
-        self.all_sprites.add(self.player1)
-        self.all_sprites.add(self.player2)
-        self.all_sprites.add(self.player3)
-        self.all_sprites.add(self.netWiz)
+        #self.all_sprites.add(self.player1)
+        #self.all_sprites.add(self.player2)      #adding the sprites to the group
+        #self.all_sprites.add(self.player3)
+        #self.all_sprites.add(self.netWiz)
 
 
 
-        for plat in PLATFORM_LIST2: #Levels just change ListValue
+        for plat in PLATFORM_LIST:                     #Change levels by just changing ListValue
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
-
-        """for wall in WALL_LIST:
-            wa = Wall(*wall)
-            self.all_sprites.add(wa)
-            self.walls.add(wa)"""
 
 
         self.spikeHitboxes = pg.sprite.Group()                                  #SPIKES FOR LEVEL 3 ONLY!!
         self.drawSpike = pg.sprite.Group()
 
-        for spike_coordinate in SPIKE_LIST2: #Spikes just change ListValue
+        for spike_coordinate in SPIKE_LIST: #Spikes just change ListValue
             (x,y) = spike_coordinate
             lespike = Spike(self.spikeHitboxes, self.drawSpike, x,y)
 
@@ -88,9 +83,7 @@ class Game:
             self.events()
             self.update()
             self.drawAll()
-                            #print ("All sprites", self.all_sprites)    TESTING TO SEE HOW MANY
-                            #print ("hit spickess", self.spikeHitboxes) SPIKES HAVE BEEN DRAWN
-                            #print ("spikes", self.drawSpike)
+
 
     def update(self):
         # Game Loop - Update
@@ -102,7 +95,7 @@ class Game:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
 
-        if self.player1.vel.y > 0:
+        """if self.player1.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player1, self.platforms, False)
             if hits:
                 self.player1.pos.y = hits[0].rect.top
@@ -118,7 +111,7 @@ class Game:
             hits = pg.sprite.spritecollide(self.player3, self.platforms, False)
             if hits:
                 self.player3.pos.y = hits[0].rect.top
-                self.player3.vel.y = 0
+                self.player3.vel.y = 0 """
 
     def events(self):
         global username
@@ -155,13 +148,13 @@ class Game:
                 self.running = False
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_w:
-                    self.player.jump() #put the jump animation here
-                if event.key == pg.K_t:
+                    self.player.jump()  #would put the jump animation here
+                """if event.key == pg.K_t:
                     self.player1.jump()
                 if event.key == pg.K_i:
                     self.player2.jump()
                 if event.key == pg.K_UP:
-                    self.player3.jump()
+                    self.player3.jump() """
 
     def drawAll(self):
         # Game Loop - draw
@@ -169,14 +162,14 @@ class Game:
         global dq
         data = dq.get()
         username = data[1]
-        wizardColour = data[2]
+        wizardColour = data[2]          #Trying to draw wizards from across multiple screens
         xCoords = data[3]
         yCoords = data[4]
         level = data[5]
         self.netWiz.draw(wizardColour, xCoords, yCoords)
 
 
-        self.scoreboard.updateScores(self.player.pos.y, self.player1.pos.y, self.player2.pos.y, self.player3.pos.y)
+        self.scoreboard.updateScores(self.player.pos.y)  #self.player1.pos.y, self.player2.pos.y, self.player3.pos.y
         self.scoreboard.drawscoreboard(self.screen, self.image)
 
         self.all_sprites.clear(self.screen,self.image)
@@ -184,7 +177,7 @@ class Game:
         self.spikeHitboxes.update()
         self.drawSpike.update()
 
-        self.spikeHitboxes.draw(self.screen)
+        self.spikeHitboxes.draw(self.screen)            #all this code clears, draws, and updates the sprites
         self.drawSpike.draw(self.screen)
 
         self.scoreboard.update()
