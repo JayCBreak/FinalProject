@@ -56,7 +56,7 @@ class Scoreboard():    #Main scoreboard class with all calculations
                 lineList = line.split("\n")
                 self.username = lineList[0]
         playerlist.close()
-        print (self.username)
+        #print (self.username)
         self.createscoreboard()
 
 
@@ -162,7 +162,6 @@ def main():   #Testing Area for code
     screen.blit(background, (0,0))
 
     scoreboard = Scoreboard()
-    print ("here we go")
     scoreboard.updateScores(960)
 
 

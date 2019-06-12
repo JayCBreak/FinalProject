@@ -77,6 +77,8 @@ def main(): # starts the code
     allSprites = pygame.sprite.Group(btnPlay, btnCharacter, btnTutorial, btnNameSet, btnExit, secretdoor, sprTWizard, sprTTower)
     background = pygame.image.load(imgBackground)   # loads the background and blits it
     screen.blit(background, (0, 0))
+    pygame.mixer.music.load('./sounds/Stand Proud and End of the World 8 - bit NES Remix.ogg')
+    pygame.mixer.music.play(-1)
 
     running = True
     while running: # begins the running loop
@@ -84,6 +86,7 @@ def main(): # starts the code
         for event in pygame.event.get(): # checks for an event to occur and does the action that suites it
             if event.type == pygame.QUIT: # if quit then it quits
                 running = False
+                pygame.mixer.music.stop()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # button pushed runs the appropriate code
                 if btnPlay.click():
                     game("play")
@@ -101,15 +104,16 @@ def main(): # starts the code
                     webbrowser.open('https://www.youtube.com/watch?v=oHg5SJYRHA0')
                 elif btnExit.click():
                     running = False
+                    pygame.mixer.music.stop()
         pygame.display.flip() # flips the display, clears, updates and draws all the sprites
         allSprites.clear(screen, background)
         allSprites.update()
         allSprites.draw(screen)
 
 
-def game(play = "play"): # defines the game and allows for the appropriate code to be run based on the button hit
-    global username, charModel # imports global usernames
-    if play == "play": #
+def game(play="play"):  # defines the game and allows for the appropriate code to be run based on the button hit
+    global username, charModel  # imports global usernames
+    if play == "play":  # Runs game.py which is the game
         if username is None:
             username = "player"
             playerlist = open ("playerlist", "w")

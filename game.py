@@ -3,7 +3,7 @@ Wizard Tower Main Game code
 
 by:
 Trey Cowell
-Will Smith
+William Smith
 Brandon Wabnitz
 Jacob Chotenovsky
 
@@ -18,6 +18,15 @@ from threading import Thread
 from scoreboard import Scoreboard
 
 playerList = []
+userFile = open("playerlist", "r")
+username = userFile.read()
+userFile.close()
+wizColFile = open("wizCol", "r")
+wizCol = wizColFile.read()
+wizColFile.close()
+defaultWiz = [username, wizCol, "20", "20", "0"]
+dq = queue.Queue()
+dq.put(defaultWiz)
 
 
 class Game:
@@ -49,13 +58,13 @@ class Game:
         #self.player1 = Player1(self)
         #self.player2 = Player2(self)        #getting the specific wizards from sprites.py
         #self.player3 = Player3(self)
-        #self.netWiz = networkWiz(self)
+        self.netWiz = networkWiz()
 
         self.all_sprites.add(self.player)
         #self.all_sprites.add(self.player1)
         #self.all_sprites.add(self.player2)      #adding the sprites to the group
         #self.all_sprites.add(self.player3)
-        #self.all_sprites.add(self.netWiz)
+        self.all_sprites.add(self.netWiz)
 
 
 
@@ -160,14 +169,15 @@ class Game:
         # Game Loop - draw
 
         global dq
-        data = dq.get()
-        username = data[1]
-        wizardColour = data[2]          #Trying to draw wizards from across multiple screens
-        xCoords = data[3]
-        yCoords = data[4]
-        level = data[5]
-        self.netWiz.draw(wizardColour, xCoords, yCoords)
-
+        if dq.empty() is False:
+            data = dq.get()
+            print("The date is ", data)
+            username = data[0]
+            wizardColour = data[1]          #Trying to draw wizards from across multiple screens
+            xCoords = data[2]
+            yCoords = data[3]
+            level = data[4]
+            #self.netWiz.draw(wizardColour, xCoords, yCoords)
 
         self.scoreboard.updateScores(self.player.pos.y)  #self.player1.pos.y, self.player2.pos.y, self.player3.pos.y
         self.scoreboard.drawscoreboard(self.screen, self.image)
@@ -234,7 +244,6 @@ class ClientSend:
             data = data[2:-1]
             data = data.split(";")
             global dq
-            dq = queue.Queue()
             dq.put(data)
         except:
             print("Unable to receive data from the Server.")
@@ -260,7 +269,7 @@ def network(wizard="b", username="bob", q=queue.Queue()):
 
 q = queue.Queue()
 
-Thread(target=network, args=("Wizard", "Username", q)).start()
+Thread(target=network, args=(wizCol, username, q)).start()
 
 
 main(q)
