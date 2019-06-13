@@ -113,7 +113,7 @@ class Scoreboard():    #Main scoreboard class with all calculations
         yPos = 20
         self.labelList = []
         for lineOfText in (self.textList):
-            label = Label(lineOfText, 800, yPos)
+            label = Label(lineOfText, 790, yPos)
             yPos += 25
             self.labelList.append(label)
 

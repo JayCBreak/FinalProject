@@ -44,8 +44,8 @@ class Game:
 
 
         self.image = pg.image.load("./images/Stonewall.jpg")
-        self.image = pg.transform.scale(self.image,(900,1000))
-        self.screen.blit(self.image,(0,0))
+        self.image = pg.transform.scale(self.image, (900, 1000))
+        self.screen.blit(self.image, (0, 0))
 
 
     def new(self):
@@ -53,18 +53,19 @@ class Game:
         self.all_sprites = pg.sprite.Group()    #creating a group for the wizards/ sprites/ and scoreboard
         self.platforms = pg.sprite.Group()
         self.scoreGroup = pg.sprite.Group()
+        self.netWizGroup = pg.sprite.Group()
 
         self.player = Player(self)
         #self.player1 = Player1(self)
         #self.player2 = Player2(self)        #getting the specific wizards from sprites.py
         #self.player3 = Player3(self)
-        self.netWiz = networkWiz()
+        self.netWiz = networkWiz(self)
 
         self.all_sprites.add(self.player)
         #self.all_sprites.add(self.player1)
         #self.all_sprites.add(self.player2)      #adding the sprites to the group
         #self.all_sprites.add(self.player3)
-        self.all_sprites.add(self.netWiz)
+        self.netWizGroup.add(self.netWiz)
 
 
 
@@ -171,19 +172,20 @@ class Game:
         global dq
         if dq.empty() is False:
             data = dq.get()
-            print("The date is ", data)
-            username = data[0]
-            wizardColour = data[1]          #Trying to draw wizards from across multiple screens
-            xCoords = data[2]
-            yCoords = data[3]
-            level = data[4]
-            #self.netWiz.draw(wizardColour, xCoords, yCoords)
+            self.netUsername = data[0]
+            self.netwizardColour = data[1]          #Trying to draw wizards from across multiple screens
+            self.netxCoords = data[2]
+            self.netyCoords = data[3]
+            self.netlevel = data[4]
 
         self.scoreboard.updateScores(self.player.pos.y)  #self.player1.pos.y, self.player2.pos.y, self.player3.pos.y
         self.scoreboard.drawscoreboard(self.screen, self.image)
 
         self.all_sprites.clear(self.screen,self.image)
         self.all_sprites.draw(self.screen)
+        self.netWizGroup.clear(self.screen,self.image)
+        self.netWizGroup.update(self.netxCoords, self.netyCoords, self.netwizardColour)
+        self.netWizGroup.draw(self.screen)
         self.spikeHitboxes.update()
         self.drawSpike.update()
 
@@ -197,6 +199,13 @@ class Game:
         q.queue.clear()
         q.put(self.player.pos.x)
         q.put(self.player.pos.y)
+
+    #spikedeath = pygame.sprite.spritecollide(spikeHitboxes, player)
+    #if spikedeath:
+     #   self.player.pos(450, 930)
+
+    #arrowdeath = pygame.sprite.spritecollide(player, arrow)
+    #if arrowdeath:
 
 
     def show_start_screen(self):
